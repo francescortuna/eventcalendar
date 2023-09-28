@@ -36,12 +36,26 @@ public class Date implements Comparable<Date> {
         return month + "/" + day + "/" + year;
     }
 
+    /**
+     * Getter method for day of a date
+     * @return day
+     */
     public int getDay() {
         return day;
     }
+
+    /**
+     * Getter method for month of a date
+     * @return month
+     */
     public int getMonth() {
         return month;
     }
+
+    /**
+     * Getter method for year of a date
+     * @return year
+     */
     public int getYear() {
         return year;
     }
