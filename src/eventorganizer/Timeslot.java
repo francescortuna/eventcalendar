@@ -22,4 +22,20 @@ public enum Timeslot {
         this.hour = hour;
         this.minute = minute;
     }
+
+    /**
+     * Getter method
+     * @return hour
+     */
+    public int getHour() {
+        return hour;
+    }
+
+    /**
+     * Getter method
+     * @return minute
+     */
+    public int getMinute() {
+        return minute;
+    }
 }
