@@ -29,8 +29,10 @@ public class Date implements Comparable<Date> {
      * Creates a date with today's date
      */
     public Date() {
-        Calendar today = Calendar.getInstance();
-        Date todayDate = (Date) today;
+        Date today = new Date();
+        Calendar todaysDate = Calendar.getInstance();
+        today = (Date) todaysDate;
+        return todayDate;
     }
 
     /**
@@ -38,7 +40,9 @@ public class Date implements Comparable<Date> {
      */
     @Override
     public int compareTo(Date date) {
-
+        Date eventDate = date;
+        Date currentDate = today();
+        return (currentDate.compareTo(eventDate))
     }
 
     /**
@@ -54,9 +58,9 @@ public class Date implements Comparable<Date> {
      */
     public boolean isValid() {
 
-        this.year = year;
-        this.month = month;
-        this.day = day;
+        int year = getYear();
+        int month = getMonth();
+        int day = getDay();
 
         public static final int MAX_MONTHS = 12;
         public static final int MIN_MONTHS = 1;
