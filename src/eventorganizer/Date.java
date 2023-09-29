@@ -25,7 +25,7 @@ public class Date implements Comparable<Date> {
      * Creates a date with today's date
      */
     public Date() {
-        Date todayDate = new Date (date);
+        Date todayDate = new Date(date);
     }
 
     /**
@@ -69,8 +69,8 @@ public class Date implements Comparable<Date> {
         public static final int MIN_DAYS = 1;
         public static final int MONTH_WITH_30DAYS = 30;
         public static final int MONTH_WITH_31DAYS = 31;
-        public static final int NOT_LEAP_YEAR_28DAYS = 28;
-        public static final int IS_LEAP_YEAR_29DAYS = 29;
+        public static final int DAYS_IN_FEB_NOT_LEAP_YEAR = 28;
+        public static final int DAYS_IN_FEB_LEAP_YEAR = 29;
 
         public static final int JANUARY = 1;
         public static final int FEBRUARY = 2;
@@ -153,8 +153,13 @@ public class Date implements Comparable<Date> {
     public int getYear() {
         return year;
     }
-    public boolean equals (Object obj) {
 
+    /**
+     *  Check if two dates are the same
+     */
+    @Override
+    public boolean equals (Object obj) {
+        if ()
     }
 
 
