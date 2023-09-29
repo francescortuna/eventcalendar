@@ -29,7 +29,8 @@ public class Date implements Comparable<Date> {
      * Creates a date with today's date
      */
     public Date() {
-        Calendar todayDate = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+        Date todayDate = (Date) today;
     }
 
     /**
