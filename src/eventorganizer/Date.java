@@ -65,8 +65,12 @@ public class Date implements Comparable<Date> {
 
         public static final int MAX_MONTHS = 12;
         public static final int MIN_MONTHS = 1;
-        public static final int MAX_DAYS = 31;
+
         public static final int MIN_DAYS = 1;
+        public static final int MONTH_WITH_30DAYS = 30;
+        public static final int MONTH_WITH_31DAYS = 31;
+        public static final int NOT_LEAP_YEAR_28DAYS = 28;
+        public static final int IS_LEAP_YEAR_29DAYS = 29;
 
         public static final int JANUARY = 1;
         public static final int FEBRUARY = 2;
@@ -80,9 +84,6 @@ public class Date implements Comparable<Date> {
         public static final int OCTOBER = 10;
         public static final int NOVEMBER = 11;
         public static final int DECEMBER = 12;
-
-        public static final int MONTH_WITH_31DAYS = 31;
-        public static final int MONTH_WITH_30DAYS = 30;
 
         public static final int QUADRENNIAL = 4;
         public static final int CENTENNIAL = 100;
@@ -99,13 +100,26 @@ public class Date implements Comparable<Date> {
         }
 
         if(month >= MIN_MONTHS && month <= MAX_MONTHS){
-            if(month >= MIN_DAYS && month <= MAX_DAYS){
-                if(month == JANUARY || MARCH || MAY || JULY || AUGUST || OCTOBER || DECEMBER){
+            if(day >= MIN_DAYS) {
+                if (month == JANUARY || MARCH || MAY || JULY || AUGUST || OCTOBER || DECEMBER) {
+                    if (day <= MONTH_WITH_31DAYS) {
+                        return true;
+                    }
 
-                }
-            }
-        }
-        return false;
+                } else if (month == APRIL || JUNE || SEPTEMBER || NOVEMBER) {
+                    if (day <= MONTH_WITH_30DAYS) {
+                        return true;
+                    }
+
+                } else if (month == FEBRUARY) {
+                    if (isLeapYear && day <= IS_LEAP_YEAR_29DAYS) {
+                        return true;
+                    } else if (day <= NOT_LEAP_YEAR_28DAYS){
+                        return true;
+                    }
+                } return false;
+            } return false;
+        } return false;
 
     }
     /**
