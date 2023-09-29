@@ -1,4 +1,5 @@
 package eventorganizer;
+import java.util.Calendar;
 
 /**
  * @author Jia Wern Chong
@@ -16,24 +17,19 @@ public class Date implements Comparable<Date> {
      * @param date
      */
     Date(String date) {
-        this.year = year;
-        this.month = month;
-        this.day = day;
+        StringTokenizer dateToken = new StringTokenizer(date, "/");
+        while (dateToken.hasMoreTokens()){
+            month = Integer.parseInt(dateToken.nextToken());
+            day = Integer.parseInt(dateToken.nextToken());
+            year = Integer.parseInt(dateToken.nextToken());
+        }
     }
 
     /**
      * Creates a date with today's date
      */
     public Date() {
-        Date todayDate = new Date(date);
-    }
-
-    /**
-     * Copy constructor that clones a date object
-     * @param date
-     */
-    public Date(Date date) {
-
+        Calendar todayDate = Calendar.getInstance();
     }
 
     /**
@@ -56,12 +52,10 @@ public class Date implements Comparable<Date> {
      * Check if date is a valid calandar date
      */
     public boolean isValid() {
-        StringTokenizer dateToken = new StringTokenizer(date, "/");
-        while (dateToken.hasMoreTokens()){
-            month = Integer.parseInt(dateToken.nextToken());
-            day = Integer.parseInt(dateToken.nextToken());
-            year = Integer.parseInt(dateToken.nextToken());
-        }
+
+        this.year = year;
+        this.month = month;
+        this.day = day;
 
         public static final int MAX_MONTHS = 12;
         public static final int MIN_MONTHS = 1;
