@@ -1,5 +1,6 @@
 package eventorganizer;
 import java.util.Calendar;
+import java.util.StringTokenizer;
 
 /**
  * @author Jia Wern Chong
@@ -7,6 +8,18 @@ import java.util.Calendar;
 
 public class Date implements Comparable<Date> {
 
+    public static final int MAX_MONTHS = 12;
+    public static final int MIN_MONTHS = 1;
+
+    public static final int MIN_DAYS = 1;
+    public static final int MONTH_WITH_30DAYS = 30;
+    public static final int MONTH_WITH_31DAYS = 31;
+    public static final int DAYS_IN_FEB_NOT_LEAP_YEAR = 28;
+    public static final int DAYS_IN_FEB_LEAP_YEAR = 29;
+
+    public static final int QUADRENNIAL = 4;
+    public static final int CENTENNIAL = 100;
+    public static final int QUATERCENTENNIAL = 400;
 
     private int year;
     private int month;
@@ -29,10 +42,13 @@ public class Date implements Comparable<Date> {
      * Creates a date with today's date
      */
     public Date() {
-        Date today = new Date();
         Calendar todaysDate = Calendar.getInstance();
-        today = (Date) todaysDate;
-        return todayDate;
+        int month = todaysDate.get(Calendar.MONTH)+1;
+        int day = todaysDate.get(Calendar.DAY_OF_MONTH);
+        int year = todaysDate.get(Calendar.YEAR);
+
+        String formattedDate = string.format("%02d/%02d/%02d", month, day, year %100);
+        Date today = new Date(formattedDate);
     }
 
     /**
@@ -58,35 +74,9 @@ public class Date implements Comparable<Date> {
      */
     public boolean isValid() {
 
-        int year = getYear();
         int month = getMonth();
         int day = getDay();
-
-        public static final int MAX_MONTHS = 12;
-        public static final int MIN_MONTHS = 1;
-
-        public static final int MIN_DAYS = 1;
-        public static final int MONTH_WITH_30DAYS = 30;
-        public static final int MONTH_WITH_31DAYS = 31;
-        public static final int DAYS_IN_FEB_NOT_LEAP_YEAR = 28;
-        public static final int DAYS_IN_FEB_LEAP_YEAR = 29;
-
-        public static final int JANUARY = 1;
-        public static final int FEBRUARY = 2;
-        public static final int MARCH = 3;
-        public static final int APRIL = 4;
-        public static final int MAY = 5;
-        public static final int JUNE = 6;
-        public static final int JULY = 7;
-        public static final int AUGUST = 8;
-        public static final int SEPTEMBER = 9;
-        public static final int OCTOBER = 10;
-        public static final int NOVEMBER = 11;
-        public static final int DECEMBER = 12;
-
-        public static final int QUADRENNIAL = 4;
-        public static final int CENTENNIAL = 100;
-        public static final int QUATERCENTENNIAL = 400;
+        int year = getYear();
 
         public boolean isLeapYear(){
             if(year%QUADRENNIAL == 0){
@@ -158,7 +148,13 @@ public class Date implements Comparable<Date> {
      */
     @Override
     public boolean equals (Object obj) {
-        if ()
+        Date eventDate = obj;
+        Date currentDate = today();
+        if(eventDate.equals(currentDate)){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
