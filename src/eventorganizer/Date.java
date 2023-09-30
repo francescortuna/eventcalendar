@@ -109,8 +109,8 @@ public class Date implements Comparable<Date> {
                 } return false;
             } return false;
         } return false;
-
     }
+
     /**
      * Returns the textual representation of a fitness.student.Date object
      * @param date
