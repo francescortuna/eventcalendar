@@ -47,7 +47,7 @@ public class Date implements Comparable<Date> {
         int day = todayDate.get(Calendar.DAY_OF_MONTH); // Get the current day from Calendar class and assign the day
         int year = todayDate.get(Calendar.YEAR); // Get the current year from Calendar class and assign the year
 
-        String formattedDate = string.format("%02d/%02d/%04d", month, day, year); // Formats the date to be MM/DD/YYYY
+        String formattedDate = String.format("%02d/%02d/%04d", month, day, year); // Formats the date to be MM/DD/YYYY
         Date today = new Date(formattedDate); // Creates and assign a new Date object for today's date
     }
 
@@ -69,6 +69,21 @@ public class Date implements Comparable<Date> {
     public static Date today () {
         return new Date();
     }
+
+    /**
+     * Check if year is a leap year or not
+     * @return true or false
+     */
+    public boolean isLeapYear() { // Method to check if it is a leap year
+        if(year%QUADRENNIAL == 0){
+            if(year%CENTENNIAL==0){
+                if(year%QUATERCENTENNIAL==0){
+                    return true; // If year is divisible by 4 (quadrennial), 100 (centennial) and 400 (quatercentennial), it's a leap year,returns true
+                } else { return false;} // If year is divisible by 100 but not 400, it is not a leap year, returns false
+            } else { return true; } // If year is only divisible by 4 and not divisible by 100, it is a leap year, returns true
+        } else { return false; } // If year is not divisible by 4, it is not a leap year, returns false
+    }
+
 
     /**
      * Check if date is a valid calendar date
@@ -93,15 +108,7 @@ public class Date implements Comparable<Date> {
         int dec = Month.DECEMBER.getMonthValue();
 
 
-        public boolean isLeapYear() { // Method to check if it is a leap year
-            if(year%QUADRENNIAL == 0){
-                if(year%CENTENNIAL==0){
-                    if(year%QUATERCENTENNIAL==0){
-                        return true; // If year is divisible by 4 (quadrennial), 100 (centennial) and 400 (quatercentennial), it's a leap year,returns true
-                    } else { return false;} // If year is divisible by 100 but not 400, it is not a leap year, returns false
-                } else { return true; } // If year is only divisible by 4 and not divisible by 100, it is a leap year, returns true
-            } else { return false; } // If year is not divisible by 4, it is not a leap year, returns false
-        }
+
 
         if(month >= MIN_MONTHS && month <= MAX_MONTHS){ // Checks if month is a valid month between 1(January) - 12(December)
             if(day >= MIN_DAYS) { // Checks if day is valid (>= 1) and not 0 or negative integer
@@ -117,7 +124,7 @@ public class Date implements Comparable<Date> {
                     }
 
                 } else if (month == feb) { //Check if month is February
-                    if (isLeapYear && day <= DAYS_IN_FEB_LEAP_YEAR) {
+                    if (isLeapYear() && day <= DAYS_IN_FEB_LEAP_YEAR) {
                         return true; // If it is a leap year and day is between 1-29, day is valid, return true
                     } else if (day <= DAYS_IN_FEB_NOT_LEAP_YEAR){
                         return true; // If it is not leap year and day is between 1-28, day is valid, return true
@@ -163,14 +170,15 @@ public class Date implements Comparable<Date> {
      *  Check if two dates are the same
      */
     @Override
-    //UNSURE OF EXACT USE, NEED TO UPDATE ACCORDINGLY
     public boolean equals (Object obj) {
-        Date eventDate = obj;
-        Date currentDate = today();
-        if(eventDate.equals(currentDate)){
+        if (this == obj) {
             return true;
-        } else {
+        }
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
+        Date other = (Date) obj;
+        return ((getMonth()==other.getMonth()) && (getDay() ==other.getDay())
+                && (getYear()==other.getYear()));
     }
 }
