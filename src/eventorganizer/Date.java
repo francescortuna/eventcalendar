@@ -78,6 +78,20 @@ public class Date implements Comparable<Date> {
         int day = getDay();
         int year = getYear();
 
+        Month jan = Month.JANUARY;
+        Month feb = Month.FEBRUARY;
+        Month mar = Month.MARCH;
+        Month apr = Month.APRIL;
+        Month may = Month.MAY;
+        Month june = Month.JUNE;
+        Month july = Month.JULY;
+        Month aug = Month.AUGUST;
+        Month sept = Month.SEPTEMBER;
+        Month oct = Month.OCTOBER;
+        Month nov = Month.NOVEMBER;
+        Month dec = Month.DECEMBER;
+
+
         public boolean isLeapYear(){
             if(year%QUADRENNIAL == 0){
                 if(year%CENTENNIAL==0){
@@ -90,17 +104,17 @@ public class Date implements Comparable<Date> {
 
         if(month >= MIN_MONTHS && month <= MAX_MONTHS){
             if(day >= MIN_DAYS) {
-                if (month == JANUARY || MARCH || MAY || JULY || AUGUST || OCTOBER || DECEMBER) {
+                if (month == jan || march || may || july || aug || oct || dec) {
                     if (day <= MONTH_WITH_31DAYS) {
                         return true;
                     }
 
-                } else if (month == APRIL || JUNE || SEPTEMBER || NOVEMBER) {
+                } else if (month == apr || june || sept || nov) {
                     if (day <= MONTH_WITH_30DAYS) {
                         return true;
                     }
 
-                } else if (month == FEBRUARY) {
+                } else if (month == feb) {
                     if (isLeapYear && day <= IS_LEAP_YEAR_29DAYS) {
                         return true;
                     } else if (day <= NOT_LEAP_YEAR_28DAYS){
@@ -156,6 +170,4 @@ public class Date implements Comparable<Date> {
             return false;
         }
     }
-
-
 }
