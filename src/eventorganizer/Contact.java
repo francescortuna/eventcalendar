@@ -14,7 +14,7 @@ public class Contact {
      * @param department Department
      * @param email Contact email
      */
-    Contact(Department department, String email) {
+    public Contact(Department department, String email) {
         this.department = department;
         this.email = email;
     }

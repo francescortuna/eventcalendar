@@ -2,7 +2,7 @@ package eventorganizer;
 
 /**
  * @author Frances Cortuna
- * Constants for location
+ *         Constants for location
  */
 
 public enum Location {
@@ -18,6 +18,7 @@ public enum Location {
 
     /**
      * Create a Location object with the building name and campus name
+     * 
      * @param buildingName
      * @param campusName
      */
@@ -28,6 +29,7 @@ public enum Location {
 
     /**
      * Getter method
+     * 
      * @return Building name
      */
     public String getBuildingName() {
@@ -36,6 +38,7 @@ public enum Location {
 
     /**
      * Getter method
+     * 
      * @return Campus name
      */
     public String getCampusName() {
