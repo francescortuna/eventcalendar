@@ -7,8 +7,8 @@ package eventorganizer;
 
 public enum Timeslot {
     MORNING(10, 30),
-    AFTERNOON(2, 00),
-    EVENING(6, 30);
+    AFTERNOON(14, 0),
+    EVENING(18, 30);
 
     private int hour;
     private int minute;
@@ -34,12 +34,28 @@ public enum Timeslot {
             case MORNING:
                 return String.format("%02d:%02d AM", hour, minute);
             case AFTERNOON:
-                return String.format("%d:%02d PM", hour, minute);
+                return String.format("%d:%02d PM", hour % 12, minute); // ternary operator turns 14 into 2
             case EVENING:
-                return String.format("%d:%02d PM", hour, minute);
+                return String.format("%d:%02d PM", hour % 12, minute); // turns 18 into 6
             default:
                 return "";
 
         }
+    }
+
+    /**
+     * 
+     * @return hour
+     */
+    public int getHour() {
+        return hour;
+    }
+
+    /**
+     * 
+     * @return minute
+     */
+    public int getMinute() {
+        return minute;
     }
 }

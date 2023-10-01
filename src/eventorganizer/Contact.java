@@ -39,4 +39,12 @@ public class Contact {
         }
         return false; // If at least one field is incorrect, return false
     }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }

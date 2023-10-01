@@ -48,19 +48,21 @@ public class Event implements Comparable<Event> {
      * @return String with formatted event details
      */
 
-    @Override // TODO: Finish method
+    @Override
     public String toString() {
-        return String.format("[Event Date: %02d/%02d/2%03d] [Start: %s] [End: ]", getDate().getMonth(),
-                getDate().getDay(), getDate().getYear(), getStartTime()); // TODO: fix format for date (year)
+        return String.format("[Event Date: %02d/%02d/%04d] [Start: %s] [End: %s] @%s (%s, %s) [Contact: %s, %s]",
+                getDate().getMonth(),
+                getDate().getDay(), getDate().getYear(), getStartTime().getStartTime(), getEndTime(), getLocation(),
+                getLocation().getBuildingName(), getLocation().getCampusName(), getContact().getDepartment(),
+                getContact().getEmail());
     }
 
     /**
-     * @param other Other event being compared
+     * @param other Event being compared
      * @return
      */
     @Override
     public int compareTo(Event other) {
-        // TODO: Finish method
         int dateComparison = this.getDate().compareTo(other.getDate());
         if (dateComparison != 0) {
             return dateComparison;
@@ -71,6 +73,29 @@ public class Event implements Comparable<Event> {
     }
 
     /**
+     * Gets end time
+     * @return
+     */
+    public String getEndTime() {
+        int startHour = getStartTime().getHour();
+        int startMinute = getStartTime().getMinute();
+
+        int addHour = duration / 60; // 1 hour is 60 minutes, so divide duration by 60 to get how many hours to add
+        int addMinute = duration % 60; // duration modulus 60 gets how many minutes to add
+
+        int endHour = startHour + addHour;
+        int endMinute = startMinute + addMinute;
+        if (endMinute >= 60) {
+            endHour++;
+            endMinute %= 60;
+        }
+
+        return String.format("%02d:%02d %s", endHour > 12 ? endHour % 12 : endHour, endMinute,
+                endHour >= 12 ? "PM" : "AM");
+    }
+
+    /**
+     * Return date
      * @return Date
      */
     public Date getDate() {
@@ -78,6 +103,7 @@ public class Event implements Comparable<Event> {
     }
 
     /**
+     * Return timeslot
      * @return Timeslot
      */
     public Timeslot getStartTime() {
@@ -85,6 +111,7 @@ public class Event implements Comparable<Event> {
     }
 
     /**
+     * Return location
      * @return Location
      */
     public Location getLocation() {
@@ -92,16 +119,10 @@ public class Event implements Comparable<Event> {
     }
 
     /**
+     * Return contact
      * @return Contact
      */
     public Contact getContact() {
         return contact;
-    }
-
-    /**
-     * @return Duration
-     */
-    public int getDuration() {
-        return duration;
     }
 }
