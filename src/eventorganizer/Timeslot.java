@@ -34,9 +34,9 @@ public enum Timeslot {
             case MORNING:
                 return String.format("%02d:%02d AM", hour, minute);
             case AFTERNOON:
-                return String.format("%02d:%02d PM", hour, minute);
+                return String.format("%d:%02d PM", hour, minute);
             case EVENING:
-                return String.format("%02d:%02d PM", hour, minute);
+                return String.format("%d:%02d PM", hour, minute);
             default:
                 return "";
 

@@ -25,6 +25,10 @@ public class Event implements Comparable<Event> {
         this.duration = duration;
     }
 
+    /**
+     * @param object Event being compared
+     * @return boolean Whether or not two events are equal
+     */
     @Override
     public boolean equals(Object object) {
         if (this == object) {
@@ -40,32 +44,20 @@ public class Event implements Comparable<Event> {
                 getStartTime().equals(other.getStartTime()) && getLocation().equals(other.getLocation()));
     }
 
+    /**
+     * @return String with formatted event details
+     */
+
     @Override // TODO: Finish method
     public String toString() {
         return String.format("[Event Date: %02d/%02d/2%03d] [Start: %s] [End: ]", getDate().getMonth(),
                 getDate().getDay(), getDate().getYear(), getStartTime()); // TODO: fix format for date (year)
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public Timeslot getStartTime() {
-        return startTime;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public Contact getContact() {
-        return contact;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
+    /**
+     * @param other Other event being compared
+     * @return
+     */
     @Override
     public int compareTo(Event other) {
         // TODO: Finish method
@@ -76,5 +68,40 @@ public class Event implements Comparable<Event> {
 
         int timeslotComparison = this.getStartTime().compareTo(other.getStartTime());
         return timeslotComparison;
+    }
+
+    /**
+     * @return Date
+     */
+    public Date getDate() {
+        return date;
+    }
+
+    /**
+     * @return Timeslot
+     */
+    public Timeslot getStartTime() {
+        return startTime;
+    }
+
+    /**
+     * @return Location
+     */
+    public Location getLocation() {
+        return location;
+    }
+
+    /**
+     * @return Contact
+     */
+    public Contact getContact() {
+        return contact;
+    }
+
+    /**
+     * @return Duration
+     */
+    public int getDuration() {
+        return duration;
     }
 }

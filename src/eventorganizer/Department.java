@@ -2,7 +2,7 @@ package eventorganizer;
 
 /**
  * @author Frances Cortuna
- * Constants for departments
+ *         Constants for departments
  */
 
 public enum Department {
@@ -16,6 +16,7 @@ public enum Department {
 
     /**
      * Create a Department object with its full name
+     * 
      * @param fullName Full name of the department
      */
     Department(String fullName) {
