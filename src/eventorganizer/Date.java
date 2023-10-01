@@ -30,11 +30,11 @@ public class Date implements Comparable<Date> {
      * @param date
      */
     Date(String date) {
-        StringTokenizer dateToken = new StringTokenizer(date, "/");
-        while (dateToken.hasMoreTokens()){
-            month = Integer.parseInt(dateToken.nextToken());
-            day = Integer.parseInt(dateToken.nextToken());
-            year = Integer.parseInt(dateToken.nextToken());
+        StringTokenizer dateToken = new StringTokenizer(date, "/"); // Creates new StringTokenizer object to separate dates into tokens
+        while (dateToken.hasMoreTokens()){ // Iterates through the tokens
+            month = Integer.parseInt(dateToken.nextToken()); // Cast string into integers for month
+            day = Integer.parseInt(dateToken.nextToken()); // Cast string into integers for day
+            year = Integer.parseInt(dateToken.nextToken()); // Cast string into integers for year
         }
     }
 
@@ -42,13 +42,13 @@ public class Date implements Comparable<Date> {
      * Creates a date with today's date
      */
     public Date() {
-        Calendar todayDate = Calendar.getInstance();
-        int month = todayDate.get(Calendar.MONTH)+1;
-        int day = todayDate.get(Calendar.DAY_OF_MONTH);
-        int year = todayDate.get(Calendar.YEAR);
+        Calendar todayDate = Calendar.getInstance(); //Creates a calendar object to get today's date
+        int month = todayDate.get(Calendar.MONTH)+1; // Get the current month from Calendar class and assign the month
+        int day = todayDate.get(Calendar.DAY_OF_MONTH); // Get the current day from Calendar class and assign the day
+        int year = todayDate.get(Calendar.YEAR); // Get the current year from Calendar class and assign the year
 
-        String formattedDate = string.format("%02d/%02d/%04d", month, day, year);
-        Date today = new Date(formattedDate);
+        String formattedDate = string.format("%02d/%02d/%04d", month, day, year); // Formats the date to be MM/DD/YYYY
+        Date today = new Date(formattedDate); // Creates and assign a new Date object for today's date
     }
 
     /**
