@@ -37,12 +37,13 @@ public class Event implements Comparable<Event> {
 
         Event other = (Event) object;
         return (getDate().equals(other.getDate()) &&
-                getStartTime().equals(other.getStartTime()) && getLocation().equals(other.getLocation())    );
+                getStartTime().equals(other.getStartTime()) && getLocation().equals(other.getLocation()));
     }
 
-    @Override
+    @Override // TODO: Finish method
     public String toString() {
-        return String.format("[Event Date: %02s/%02s/2%03s] [Start: %s:%s]", getDate().getMonth(), getDate().getDay(), getDate().getYear());
+        return String.format("[Event Date: %02d/%02d/2%03d] [Start: %s] [End: ]", getDate().getMonth(),
+                getDate().getDay(), getDate().getYear(), getStartTime()); // TODO: fix format for date (year)
     }
 
     public Date getDate() {
@@ -63,5 +64,17 @@ public class Event implements Comparable<Event> {
 
     public int getDuration() {
         return duration;
+    }
+
+    @Override
+    public int compareTo(Event other) {
+        // TODO: Finish method
+        int dateComparison = this.getDate().compareTo(other.getDate());
+        if (dateComparison != 0) {
+            return dateComparison;
+        }
+
+        int timeslotComparison = this.getStartTime().compareTo(other.getStartTime());
+        return timeslotComparison;
     }
 }
