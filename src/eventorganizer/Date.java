@@ -93,38 +93,38 @@ public class Date implements Comparable<Date> {
         int dec = Month.DECEMBER.getMonthValue();
 
 
-        public boolean isLeapYear() {
+        public boolean isLeapYear() { // Method to check if it is a leap year
             if(year%QUADRENNIAL == 0){
                 if(year%CENTENNIAL==0){
                     if(year%QUATERCENTENNIAL==0){
-                        return true;
-                    } else { return false;}
-                } else { return true; }
-            } else { return false; }
+                        return true; // If year is divisible by 4 (quadrennial), 100 (centennial) and 400 (quatercentennial), it's a leap year,returns true
+                    } else { return false;} // If year is divisible by 100 but not 400, it is not a leap year, returns false
+                } else { return true; } // If year is only divisible by 4 and not divisible by 100, it is a leap year, returns true
+            } else { return false; } // If year is not divisible by 4, it is not a leap year, returns false
         }
 
-        if(month >= MIN_MONTHS && month <= MAX_MONTHS){
-            if(day >= MIN_DAYS) {
+        if(month >= MIN_MONTHS && month <= MAX_MONTHS){ // Checks if month is a valid month between 1(January) - 12(December)
+            if(day >= MIN_DAYS) { // Checks if day is valid (>= 1) and not 0 or negative integer
                 if (month == jan || month == mar || month == may || month == july ||
-                        month == aug || month == oct || month == dec) {
+                        month == aug || month == oct || month == dec) { // Check if month is a month with 31 days
                     if (day <= MONTH_WITH_31DAYS) {
-                        return true;
+                        return true; // If day is between 1-31 days, day is valid, return true
                     }
 
-                } else if (month == apr || month == june || month == sept || month == nov) {
+                } else if (month == apr || month == june || month == sept || month == nov) { // Check if month is a month with 30 days
                     if (day <= MONTH_WITH_30DAYS) {
-                        return true;
+                        return true; // If day is between 1-30 days, day is valid, return true
                     }
 
-                } else if (month == feb) {
+                } else if (month == feb) { //Check if month is February
                     if (isLeapYear && day <= DAYS_IN_FEB_LEAP_YEAR) {
-                        return true;
+                        return true; // If it is a leap year and day is between 1-29, day is valid, return true
                     } else if (day <= DAYS_IN_FEB_NOT_LEAP_YEAR){
-                        return true;
+                        return true; // If it is not leap year and day is between 1-28, day is valid, return true
                     }
-                } return false;
-            } return false;
-        } return false;
+                } return false; // If any field is incorrect
+            } return false; // If day is 0 or a negative integer, day is invalid, return false
+        } return false; // If month is not a valid month between 1(January) - 12(December), return false
     }
 
     /**

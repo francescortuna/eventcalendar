@@ -2,6 +2,8 @@ package eventorganizer;
 
 /**
  * @author Jia Wern Chong
+ * Constants for months
+ *
  */
 public enum Month {
     JANUARY(1),
