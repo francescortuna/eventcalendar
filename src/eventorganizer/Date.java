@@ -55,6 +55,7 @@ public class Date implements Comparable<Date> {
      * Compares 2 dates
      */
     @Override
+    //UNSURE OF EXACT USE, NEED TO UPDATE ACCORDINGLY
     public int compareTo(Date date) {
         Date eventDate = date;
         Date currentDate = today();
@@ -162,6 +163,7 @@ public class Date implements Comparable<Date> {
      *  Check if two dates are the same
      */
     @Override
+    //UNSURE OF EXACT USE, NEED TO UPDATE ACCORDINGLY
     public boolean equals (Object obj) {
         Date eventDate = obj;
         Date currentDate = today();
