@@ -94,7 +94,6 @@ public class Date implements Comparable<Date> {
         } else { return false; } // If year is not divisible by 4, it is not a leap year, returns false
     }
 
-
     /**
      * Check if date is a valid calendar date
      */
@@ -116,9 +115,6 @@ public class Date implements Comparable<Date> {
         int oct = Month.OCTOBER.getMonthValue();
         int nov = Month.NOVEMBER.getMonthValue();
         int dec = Month.DECEMBER.getMonthValue();
-
-
-
 
         if(month >= MIN_MONTHS && month <= MAX_MONTHS){ // Checks if month is a valid month between 1(January) - 12(December)
             if(day >= MIN_DAYS) { // Checks if day is valid (>= 1) and not 0 or negative integer
@@ -191,4 +187,151 @@ public class Date implements Comparable<Date> {
         return ((getMonth()==other.getMonth()) && (getDay() ==other.getDay())
                 && (getYear()==other.getYear()));
     }
+
+    /**
+     *  Testbed main to exercise the isValid method.
+     * @param args command line arguments
+     */
+    public static void main(String[] args) {
+        testDays_InFebNonLeapInvalid();
+        testDays_InFebNonLeapValid();
+        testDays_InFebLeapInvalid();
+        testDays_InFebLeapValid();
+        testDays_InMonthWith31DaysInvalid();
+        testDays_InMonthWith31DaysValid();
+        testDays_InMonthWith30DaysInvalid();
+        testDays_InMonthWith30DaysValid();
+        testDay_LessThan1Day();
+        testMonth_MoreThan12Months();
+        testMonth_LessThan1Month();
+    }
+
+    /**
+     * Test case #1 for isValid(): Test Feb non leap year, date is invalid
+     */
+    private static void testDays_InFebNonLeapInvalid() {
+        Date date = new Date("2/29/2011");
+        boolean expectedOutput = false;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #1: # of days in Feb in a non-leap year is 28");
+        testResult(date, expectedOutput, actualOutput);
+    }
+
+    /**
+     * Test case #2 for isValid(): Test Feb non leap year, date is valid
+     */
+    private static void testDays_InFebNonLeapValid() {
+        Date date = new Date("2/28/2011");
+        boolean expectedOutput = true;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #2: # of days in Feb in a non-leap year is 28");
+        testResult(date, expectedOutput, actualOutput);
+    }
+
+    /**
+     * Test case #3 for isValid(): Test Feb leap year, date is invalid
+     */
+    private static void testDays_InFebLeapInvalid() {
+        Date date = new Date("2/30/2000");
+        boolean expectedOutput = false;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #3: # of days in Feb. in a leap year is 29");
+        testResult(date, expectedOutput, actualOutput);
+    }
+
+    /**
+     * Test case #4 for isValid(): Test Feb leap year, date is valid
+     */
+    private static void testDays_InFebLeapValid() {
+        Date date = new Date("2/29/2000");
+        boolean expectedOutput = true;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #4: # of days in Feb. in a leap year is 29");
+        testResult(date, expectedOutput, actualOutput);
+    }
+
+    /**
+     * Test case #5 for isValid(): Test days for month with 31 days, date is more than 31 days
+     */
+    private static void testDays_InMonthWith31DaysInvalid() {
+        Date date = new Date("3/32/2011");
+        boolean expectedOutput = false;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #5: More than 31 days for month with 31 days");
+        testResult(date, expectedOutput, actualOutput);
+    }
+
+    /**
+     * Test case #6 for isValid(): Test days for month with 31 days, less than or equals 31 days
+     */
+    private static void testDays_InMonthWith31DaysValid() {
+        Date date = new Date("3/31/2011");
+        boolean expectedOutput = true;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #6: Less than or equals to 31 days for month with 31 days");
+        testResult(date, expectedOutput, actualOutput);
+    }
+
+    /**
+     * Test case #7 for isValid(): Test days for month with 30 days, date is more than 30 days
+     */
+    private static void testDays_InMonthWith30DaysInvalid() {
+        Date date = new Date("6/31/2011");
+        boolean expectedOutput = false;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #7: More than 30 days for month with 30 days");
+        testResult(date, expectedOutput, actualOutput);
+    }
+
+    /**
+     * Test case #8 for isValid(): Test days for month with 30 days, less than or equals 30 days
+     */
+    private static void testDays_InMonthWith30DaysValid() {
+        Date date = new Date("6/30/2011");
+        boolean expectedOutput = true;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #8: Less than or equals to 30 days for month with 30 days");
+        testResult(date, expectedOutput, actualOutput);
+    }
+
+    /**
+     * Test case #9 for isValid(): Test days, less than 1 day
+     */
+    private static void testDay_LessThan1Day() {
+        Date date = new Date("4/0/2011");
+        boolean expectedOutput = false;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #9: Days less than 1 day");
+        testResult(date, expectedOutput, actualOutput);
+    }
+
+    /**
+     * Test case #10 for isValid(): Test month more than 12 months
+     */
+    private static void testMonth_MoreThan12Months() {
+        Date date = new Date("13/26/2011");
+        boolean expectedOutput = false;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #10: Months more than 12 months");
+        testResult(date, expectedOutput, actualOutput);
+    }
+
+    /**
+     * Test case #11 for isValid(): Test month less than 1 month
+     */
+    private static void testMonth_LessThan1Month() {
+        Date date = new Date("0/26/2011");
+        boolean expectedOutput = false;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #11: Months less than 1 month");
+        testResult(date, expectedOutput, actualOutput);
+    }
+
+    /**
+     * Check if a given test case PASS or FAIL
+     */
+    private static void testResult(Date date, boolean expectedOutput, boolean actualOutput) {
+
+    }
+
 }
