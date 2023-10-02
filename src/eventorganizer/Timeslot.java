@@ -27,13 +27,15 @@ public enum Timeslot {
      * @return start time
      */
     public String getStartTime() {
+        int militaryTimeEnd = 12;
+        
         switch (this) {
             case MORNING:
                 return String.format("%02d:%02d AM", hour, minute);
             case AFTERNOON:
-                return String.format("%d:%02d PM", hour % 12, minute);
+                return String.format("%d:%02d PM", hour % militaryTimeEnd, minute);
             case EVENING:
-                return String.format("%d:%02d PM", hour % 12, minute);
+                return String.format("%d:%02d PM", hour % militaryTimeEnd, minute);
             default:
                 return "";
 

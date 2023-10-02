@@ -59,7 +59,7 @@ public class Event implements Comparable<Event> {
      */
     @Override
     public String toString() {
-        return String.format("[Event Date: %02d/%02d/%04d] [Start: %s] [End: %s] @%s (%s, %s) [Contact: %s, %s]",
+        return String.format("[Event Date: %d/%02d/%04d] [Start: %s] [End: %s] @%s (%s, %s) [Contact: %s, %s]",
                 getDate().getMonth(),
                 getDate().getDay(), getDate().getYear(), getStartTime().getStartTime(), getEndTime(), getLocation(),
                 getLocation().getBuildingName(), getLocation().getCampusName(),
@@ -93,19 +93,22 @@ public class Event implements Comparable<Event> {
     public String getEndTime() {
         int startHour = getStartTime().getHour();
         int startMinute = getStartTime().getMinute();
+        int minutesInHour = 60;
+        int militaryTimeEnd = 12; // end of military time (after 12, it goes back to 1 PM, 2 PM, etc.)
+        int startOfPM = 12;
 
-        int addHour = duration / 60;
-        int addMinute = duration % 60;
+        int addHour = duration / minutesInHour;
+        int addMinute = duration % minutesInHour;
 
         int endHour = startHour + addHour;
         int endMinute = startMinute + addMinute;
-        if (endMinute >= 60) {
+        if (endMinute >= minutesInHour) {
             endHour++;
-            endMinute %= 60;
+            endMinute %= minutesInHour;
         }
 
-        return String.format("%02d:%02d %s", endHour > 12 ? endHour % 12 : endHour, endMinute,
-                endHour >= 12 ? "PM" : "AM");
+        return String.format("%02d:%02d %s", endHour > militaryTimeEnd ? endHour % militaryTimeEnd : endHour, endMinute,
+                endHour >= startOfPM ? "PM" : "AM");
     }
 
     /**
@@ -199,7 +202,7 @@ public class Event implements Comparable<Event> {
         Contact contact = new Contact(Department.CS, "fdc16@rutgers.edu");
         Event event = new Event(date, Timeslot.MORNING, Location.ARC103, contact, 45);
 
-        String expectedOutcome = "[Event Date: 05/10/2024] [Start: 10:30 AM] [End: 11:15 AM] @ARC103 (Allison Road Classroom, Busch) [Contact: Computer Science, fdc16@rutgers.edu]";
+        String expectedOutcome = "[Event Date: 5/10/2024] [Start: 10:30 AM] [End: 11:15 AM] @ARC103 (Allison Road Classroom, Busch) [Contact: Computer Science, fdc16@rutgers.edu]";
         String actualOutcome = event.toString();
         System.out.println("**Test case #1 for toString(): Check output string.");
         testResult(expectedOutcome, actualOutcome);
