@@ -2,61 +2,139 @@ package eventorganizer;
 
 /**
  * TODO add desc for class
+ * 
  * @author Jia Wern Chong, Frances Cortuna
  */
 public class EventCalendar {
 
     private static final int INITIAL_CAPACITY = 4;
     private static final int GROWTH_FACTOR = 4;
+    private static final int NOT_FOUND = -1;
 
-    private Event [] events;
+    private Event[] events;
     private int numEvents;
 
     /**
-     * Constructor for EventCalendar object
+     * Constructor for EventCalendar object to initialize object with initial
+     * capacity of 4 and initial numEvents as 0
      */
     public EventCalendar() {
-        Event[] events = new Event[INITIAL_CAPACITY];
+        events = new Event[INITIAL_CAPACITY];
+        numEvents = 0;
     }
 
+    /**
+     * Find an Event in array of Events.
+     * If Event is in array, it returns its index. If not, it returns -1
+     * 
+     * @param event Event to find in array
+     * @return Index of event in array, or -1 if not found
+     */
     private int find(Event event) {
+        for (int i = 0; i < numEvents; i++) {
+            if (events[i].equals(event)) {
+                return i;
+            }
+        }
 
+        return NOT_FOUND;
     }
 
-    //increase the capacity by 4
+    /**
+     * When array is full, grow its capacity by 4.
+     */
     private void grow() {
+        int newCapacity = events.length + 4;
+        Event[] newEventArray = new Event[newCapacity];
 
+        for (int i = 0; i < events.length; i++) {
+            newEventArray[i] = events[i];
+        }
+
+        events = newEventArray;
     }
 
+    /**
+     * Adds an Event object to array.
+     * Returns true if adding event was successful, false if not.
+     * @param event Event to add to array
+     * @return True if adding event was successful, false if not
+     */
     public boolean add(Event event) {
+        if (numEvents == events.length) {
+            grow();
+        }
 
+        events[numEvents] = event;
+        numEvents += 1;
+        return true;
     }
 
+    /**
+     * Removes an event from array.
+     * Returns true if removal was successful, false otherwise.
+     * @param event Event to remove from array.
+     * @return True if removing event was successful, false if not.
+     */
     public boolean remove(Event event) {
+        int indexOfEvent = find(event);
+        if(indexOfEvent != NOT_FOUND) {
+            for(int i = indexOfEvent; i < numEvents - 1; i++) {
+                events[i] = events[i+1];
+            }
+            numEvents -= 1;
+            return true;
+        }
 
+        return false;
     }
 
+    /**
+     * Checks if event is in array.
+     * Returns true if event is in array, false otherwise.
+     * @param event Event to search in array
+     * @return True of event is in array, false otherwise.
+     */
     public boolean contains(Event event) {
-
+        if(find(event) != NOT_FOUND) {
+            return true;
+        }
+        return false;
     }
 
-    //print the array as it is
+    /**
+     * Prints event array as it is.
+     */
     public void print() {
-
+        for(int i = 0; i < events.length; i++) {
+            System.out.println(events[i].toString());
+        }
     }
 
-    //ordered by date and timeslot
+    /**
+     * Prints event array in order by date and timeslot.
+     */
     public void printByDate() {
+        for(int i = 0; i < events.length - 1; i++) {
+            if(events[i].compareTo(events[i + 1]) <= 0) {
+                Event tempEvent = events[i];
+                events[i] = events[i + 1];
+                events[i + 1] = tempEvent;
 
+                while(i != 0) {
+                    
+                }
+            }
+        }
     }
 
-    //ordered by campus and building/room
+    // ordered by campus and building/room
     public void printByCampus() {
 
     }
 
-    //ordered by department
-    public void printByDepartment(){
+    // ordered by department
+    public void printByDepartment() {
 
     }
 }

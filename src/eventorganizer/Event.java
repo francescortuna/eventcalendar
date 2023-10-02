@@ -11,6 +11,7 @@ public class Event implements Comparable<Event> {
     private Location location;
     private Contact contact;
     private int duration;
+    public char[] toString;
 
     /**
      * Constructor for event class to initialize an Event object.
