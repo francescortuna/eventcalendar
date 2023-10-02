@@ -1,8 +1,7 @@
 package eventorganizer;
 
-import java.sql.Time;
-
 /**
+ * Event class to create an event with a date, timeslot, location, contact, and duration.
  * @author Frances Cortuna
  */
 
@@ -14,6 +13,14 @@ public class Event implements Comparable<Event> {
     private Contact contact;
     private int duration;
 
+    /**
+     * Constructor for event class to initialize an Event object.
+     * @param date Date of event
+     * @param startTime Timeslot of event
+     * @param location Location of event
+     * @param contact Contact of event
+     * @param duration Duration of event
+     */
     public Event(
             Date date,
             Timeslot startTime,
@@ -28,8 +35,9 @@ public class Event implements Comparable<Event> {
     }
 
     /**
+     * Checks if two Event objects are equal.
      * @param object Event being compared
-     * @return boolean Whether or not two events are equal
+     * @return boolean whether or not two events are equal
      */
     @Override
     public boolean equals(Object object) {
@@ -47,9 +55,9 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * @return String with formatted event details
+     * Format all event details into a String.
+     * @return String with all event details, formatted accordingly.
      */
-
     @Override
     public String toString() {
         return String.format("[Event Date: %02d/%02d/%04d] [Start: %s] [End: %s] @%s (%s, %s) [Contact: %s, %s]",
@@ -61,8 +69,12 @@ public class Event implements Comparable<Event> {
     }
 
     /**
+     * Compares two Event objects.
+     * If event being compared to a different event is happening before, it will return a negative number.
+     * If event being compared to a different event is happening after, it will return a positive number.
+     * Otherwise (if events are happening at exact same day and time), it will return 0.
      * @param other Event being compared
-     * @return
+     * @return A negative or positive number or 0 depending on if event happens before, after, or at same time as different event.
      */
     @Override
     public int compareTo(Event other) {
@@ -76,16 +88,15 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * Gets end time
-     * 
-     * @return
+     * Gets end time of an event.
+     * @return String with end time, formatted to hh:mm AM/PM
      */
     public String getEndTime() {
         int startHour = getStartTime().getHour();
         int startMinute = getStartTime().getMinute();
 
-        int addHour = duration / 60; // 1 hour is 60 minutes, so divide duration by 60 to get how many hours to add
-        int addMinute = duration % 60; // duration modulus 60 gets how many minutes to add
+        int addHour = duration / 60;
+        int addMinute = duration % 60;
 
         int endHour = startHour + addHour;
         int endMinute = startMinute + addMinute;
@@ -99,8 +110,7 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * Return date
-     * 
+     * Gets Date object of event.
      * @return Date
      */
     public Date getDate() {
@@ -108,8 +118,7 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * Return timeslot
-     * 
+     * Gets timeslot of event
      * @return Timeslot
      */
     public Timeslot getStartTime() {
@@ -117,8 +126,7 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * Return location
-     * 
+     * Gets location of event.
      * @return Location
      */
     public Location getLocation() {
@@ -126,8 +134,7 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * Return contact
-     * 
+     * Gets contact of event.
      * @return Contact
      */
     public Contact getContact() {
@@ -135,9 +142,7 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * Testbed main to test methods
-     * TODO check methods with Date methods
-     * 
+     * Testbed main to test all overrided methods.
      * @param args command line arguments
      */
     public static void main(String[] args) {
