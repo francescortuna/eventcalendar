@@ -5,7 +5,7 @@ public class EventCalendar {
     private Event [] events; //the array holding the list of events
     private int numEvents; //current number of events in the array
 
-... // WHATS THIS ... FOR?
+... // WHATS THIS "..." FOR?
     //search an event in the list
     private int find(Event event) {
 
