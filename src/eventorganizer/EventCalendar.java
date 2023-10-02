@@ -1,12 +1,24 @@
 package eventorganizer;
 
+/**
+ * TODO add desc for class
+ * @author Jia Wern Chong, Frances Cortuna
+ */
 public class EventCalendar {
 
-    private Event [] events; //the array holding the list of events
-    private int numEvents; //current number of events in the array
+    private static final int INITIAL_CAPACITY = 4;
+    private static final int GROWTH_FACTOR = 4;
 
-... // WHATS THIS "..." FOR?
-    //search an event in the list
+    private Event [] events;
+    private int numEvents;
+
+    /**
+     * Constructor for EventCalendar object
+     */
+    public EventCalendar() {
+        Event[] events = new Event[INITIAL_CAPACITY];
+    }
+
     private int find(Event event) {
 
     }
