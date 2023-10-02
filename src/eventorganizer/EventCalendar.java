@@ -44,7 +44,7 @@ public class EventCalendar {
      * When array is full, grow its capacity by 4.
      */
     private void grow() {
-        int newCapacity = events.length + 4;
+        int newCapacity = events.length + GROWTH_FACTOR;
         Event[] newEventArray = new Event[newCapacity];
 
         for (int i = 0; i < events.length; i++) {
