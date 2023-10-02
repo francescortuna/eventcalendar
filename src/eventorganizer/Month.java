@@ -1,9 +1,8 @@
 package eventorganizer;
 
 /**
- * @author Jia Wern Chong
  * Constants for months
- *
+ * @author Jia Wern Chong
  */
 public enum Month {
     JANUARY(1),
@@ -22,14 +21,15 @@ public enum Month {
     private int monthValue;
 
     /**
-     * Create a Month object with the month value
-     * @param monthValue
+     * Month constant with a month value for each month
+     * @param monthValue Month Value for each month
      */
     Month(int monthValue){
         this.monthValue = monthValue;
     }
 
     /**
+     * Gets month value for the month
      * @return Month value of the month
      */
     public int getMonthValue(){

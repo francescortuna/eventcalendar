@@ -3,6 +3,7 @@ import java.util.Calendar;
 import java.util.StringTokenizer;
 
 /**
+ * Constants for dates
  * @author Jia Wern Chong
  */
 
