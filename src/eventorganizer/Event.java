@@ -1,5 +1,7 @@
 package eventorganizer;
 
+import java.sql.Time;
+
 /**
  * @author Frances Cortuna
  */
@@ -53,7 +55,7 @@ public class Event implements Comparable<Event> {
         return String.format("[Event Date: %02d/%02d/%04d] [Start: %s] [End: %s] @%s (%s, %s) [Contact: %s, %s]",
                 getDate().getMonth(),
                 getDate().getDay(), getDate().getYear(), getStartTime().getStartTime(), getEndTime(), getLocation(),
-                getLocation().getBuildingName(), getLocation().getCampusName(), getContact().getDepartment(),
+                getLocation().getBuildingName(), getLocation().getCampusName(), getContact().getDepartment().getFullName(),
                 getContact().getEmail());
     }
 
@@ -74,6 +76,7 @@ public class Event implements Comparable<Event> {
 
     /**
      * Gets end time
+     * 
      * @return
      */
     public String getEndTime() {
@@ -96,6 +99,7 @@ public class Event implements Comparable<Event> {
 
     /**
      * Return date
+     * 
      * @return Date
      */
     public Date getDate() {
@@ -104,6 +108,7 @@ public class Event implements Comparable<Event> {
 
     /**
      * Return timeslot
+     * 
      * @return Timeslot
      */
     public Timeslot getStartTime() {
@@ -112,6 +117,7 @@ public class Event implements Comparable<Event> {
 
     /**
      * Return location
+     * 
      * @return Location
      */
     public Location getLocation() {
@@ -120,9 +126,190 @@ public class Event implements Comparable<Event> {
 
     /**
      * Return contact
+     * 
      * @return Contact
      */
     public Contact getContact() {
         return contact;
+    }
+
+    /**
+     * Testbed main to test methods
+     * TODO check methods with Date methods
+     * @param args command line arguments
+     */
+    public static void main(String[] args) {
+        // testUnequalEvents();
+        // testEqualEvents();
+        testString();
+        // testLessThanDates();
+        // testMoreThanDates();
+        // testEqualDatesTimeslots();
+        // testLessThanTimeslots();
+        // testMoreThanTimeslots();
+    }
+
+    /**
+     * Test case #1 for equals(): Check two unequal events
+     */
+    private static void testUnequalEvents() {
+        Date dateOne = new Date("05/10/2024");
+        Contact contactOne = new Contact(Department.CS, "fdc16@rutgers.edu");
+        Event eventOne = new Event(dateOne, Timeslot.MORNING, Location.ARC103, contactOne, 45);
+
+        Date dateTwo = new Date("12/25/2023");
+        Contact contactTwo = new Contact(Department.BAIT, "sjd13@rutgers.edu");
+        Event eventTwo = new Event(dateTwo, Timeslot.AFTERNOON, Location.AB2225, contactTwo, 30);
+
+        boolean expectedOutcome = false;
+        boolean actualOutcome = eventOne.equals(eventTwo);
+        System.out.println("**Test case #1: Event one and Event two are two different events.");
+        testResult(expectedOutcome, actualOutcome);
+    }
+
+    /**
+     * Test case #2 for equals(): Check two equal events
+     */
+    private static void testEqualEvents() {
+        Date dateOne = new Date("05/10/2024");
+        Contact contactOne = new Contact(Department.CS, "fdc16@rutgers.edu");
+        Event eventOne = new Event(dateOne, Timeslot.MORNING, Location.ARC103, contactOne, 45);
+
+        Date dateTwo = new Date("05/10/2024");
+        Contact contactTwo = new Contact(Department.CS, "fdc16@rutgers.edu");
+        Event eventTwo = new Event(dateTwo, Timeslot.MORNING, Location.ARC103, contactTwo, 45);
+
+        boolean expectedOutcome = true;
+        boolean actualOutcome = eventOne.equals(eventTwo);
+        System.out.println("**Test case #2: Event one and event two are the same events.");
+        testResult(expectedOutcome, actualOutcome);
+    }
+
+    /**
+     * Test case #1 for toString(): Check output string.
+     */
+    private static void testString() {
+        Date date = new Date("05/10/2024");
+        Contact contact = new Contact(Department.CS, "fdc16@rutgers.edu");
+        Event event = new Event(date, Timeslot.MORNING, Location.ARC103, contact, 45);
+
+        String expectedOutcome = "[Event Date: 05/10/2024] [Start: 10:30 AM] [End: 11:15 AM] @ARC103 (Allison Road Classroom, Busch) [Contact: Computer Science, fdc16@rutgers.edu]";
+        String actualOutcome = event.toString();
+        System.out.println("**Test case #1: Check output string.");
+        testResult(expectedOutcome, actualOutcome);
+    }
+
+    /**
+     * Test case #1 for compareTo(): Event one is before event two
+     */
+    private static void testLessThanDates() {
+        Date dateOne = new Date("11/10/2023");
+        Contact contactOne = new Contact(Department.CS, "fdc16@rutgers.edu");
+        Event eventOne = new Event(dateOne, Timeslot.MORNING, Location.ARC103, contactOne, 45);
+
+        Date dateTwo = new Date("11/20/2023");
+        Contact contactTwo = new Contact(Department.BAIT, "sjd13@rutgers.edu");
+        Event eventTwo = new Event(dateTwo, Timeslot.AFTERNOON, Location.AB2225, contactTwo, 30);
+
+        int expectedOutcome = -1;
+        int actualOutcome = eventOne.compareTo(eventTwo);
+        System.out.println("**Test case #1: Event one is before event two.");
+        testResult(expectedOutcome, actualOutcome);
+    }
+
+    /**
+     * Test case #2 for compareTo(): Event one is after event two
+     */
+    private static void testMoreThanDates() {
+        Date dateOne = new Date("11/20/2023");
+        Contact contactOne = new Contact(Department.CS, "fdc16@rutgers.edu");
+        Event eventOne = new Event(dateOne, Timeslot.MORNING, Location.ARC103, contactOne, 45);
+
+        Date dateTwo = new Date("11/10/2023");
+        Contact contactTwo = new Contact(Department.BAIT, "sjd13@rutgers.edu");
+        Event eventTwo = new Event(dateTwo, Timeslot.AFTERNOON, Location.AB2225, contactTwo, 30);
+
+        int expectedOutcome = 1;
+        int actualOutcome = eventOne.compareTo(eventTwo);
+        System.out.println("**Test case #2: Event one is after event two.");
+        testResult(expectedOutcome, actualOutcome);
+    }
+
+    /**
+     * Test case #3 for compareTo(): Events one and two are happening at the same day, at the same time
+     */
+    private static void testEqualDatesTimeslots() {
+        Date dateOne = new Date("11/10/2023");
+        Contact contactOne = new Contact(Department.CS, "fdc16@rutgers.edu");
+        Event eventOne = new Event(dateOne, Timeslot.MORNING, Location.ARC103, contactOne, 45);
+
+        Date dateTwo = new Date("11/10/2023");
+        Contact contactTwo = new Contact(Department.BAIT, "sjd13@rutgers.edu");
+        Event eventTwo = new Event(dateTwo, Timeslot.MORNING, Location.AB2225, contactTwo, 30);
+
+        int expectedOutcome = 0;
+        int actualOutcome = eventOne.compareTo(eventTwo);
+        System.out.println("**Test case #3: Event one and two are happening at the same day and time.");
+        testResult(expectedOutcome, actualOutcome);
+    }
+
+    /**
+     * Test case #4 for compareTo(): Event one is happening on the same day, but before event two
+     */
+    private static void testLessThanTimeslots() {
+        Date dateOne = new Date("11/10/2023");
+        Contact contactOne = new Contact(Department.CS, "fdc16@rutgers.edu");
+        Event eventOne = new Event(dateOne, Timeslot.MORNING, Location.ARC103, contactOne, 45);
+
+        Date dateTwo = new Date("11/10/2023");
+        Contact contactTwo = new Contact(Department.BAIT, "sjd13@rutgers.edu");
+        Event eventTwo = new Event(dateTwo, Timeslot.AFTERNOON, Location.AB2225, contactTwo, 30);
+
+        int expectedOutcome = -1;
+        int actualOutcome = eventOne.compareTo(eventTwo);
+        System.out.println("**Test case #4: Event one is happening on the same day, but before event two");
+        testResult(expectedOutcome, actualOutcome);
+    }
+
+    /**
+     * Test case #5 for compareTo(): Event one is happening on the same day, but after event two
+     */
+    private static void testMoreThanTimeslots() {
+        Date dateOne = new Date("11/10/2023");
+        Contact contactOne = new Contact(Department.CS, "fdc16@rutgers.edu");
+        Event eventOne = new Event(dateOne, Timeslot.EVENING, Location.ARC103, contactOne, 45);
+
+        Date dateTwo = new Date("11/10/2023");
+        Contact contactTwo = new Contact(Department.BAIT, "sjd13@rutgers.edu");
+        Event eventTwo = new Event(dateTwo, Timeslot.MORNING, Location.AB2225, contactTwo, 30);
+
+        int expectedOutcome = 1;
+        int actualOutcome = eventOne.compareTo(eventTwo);
+        System.out.println("**Test case #4: Event one is happening on the same day, but before event two");
+        testResult(expectedOutcome, actualOutcome);
+    }
+
+    private static void testResult(boolean expectedOutcome, boolean actualOutcome) {
+        if(expectedOutcome == actualOutcome) {
+            System.out.println("Success");
+        } else {
+            System.out.println("Fail");
+        }
+    }
+
+    private static void testResult(String expectedOutcome, String actualOutcome) {
+        if(expectedOutcome.equals(actualOutcome)) {
+            System.out.println("Success");
+        } else {
+            System.out.println("Fail");
+        }
+    }
+
+    private static void testResult(int expectedOutcome, int actualOutcome) {
+        if(expectedOutcome == actualOutcome) {
+            System.out.println("Success");
+        } else {
+            System.out.println("Fail");
+        }
     }
 }
