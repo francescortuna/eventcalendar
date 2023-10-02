@@ -116,16 +116,33 @@ public class EventCalendar {
      */
     public void printByDate() {
         for(int i = 0; i < events.length - 1; i++) {
-            if(events[i].compareTo(events[i + 1]) <= 0) {
-                Event tempEvent = events[i];
-                events[i] = events[i + 1];
-                events[i + 1] = tempEvent;
+            if(events[i].compareTo(events[i + 1]) >= 0) {
+                switchEvents(events, i, i + 1);
 
-                while(i != 0) {
-                    
+                int eventToSort = i;
+                while(eventToSort != 0) {
+                    if(events[eventToSort].compareTo(events[eventToSort - 1]) <= 0) {
+                        switchEvents(events, eventToSort, eventToSort - 1);
+
+                        eventToSort -= 1;
+                    } else {
+                        break;
+                    }
                 }
             }
         }
+    }
+
+    /**
+     * Switch the order of event one and event two.
+     * @param eventArray Event array to be changed
+     * @param eventOne Index of event one to be switched with event two
+     * @param eventTwo Index of event two to be switched with event one
+     */
+    private void switchEvents(Event[] eventArray, int eventOne, int eventTwo) {
+        Event tempEvent = eventArray[eventOne];
+        eventArray[eventOne] = eventArray[eventTwo];
+        eventArray[eventTwo] = tempEvent;
     }
 
     // ordered by campus and building/room
