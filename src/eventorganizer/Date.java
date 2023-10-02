@@ -55,11 +55,21 @@ public class Date implements Comparable<Date> {
      * Compares 2 dates
      */
     @Override
-    //UNSURE OF EXACT USE, NEED TO UPDATE ACCORDINGLY
-    public int compareTo(Date date) {
-        Date eventDate = date;
-        Date currentDate = today();
-        return (currentDate.compareTo(eventDate));
+    public int compareTo(Date other) {
+        // Compare years
+        int yearComparison = this.year - other.getYear();
+        if (yearComparison != 0) {
+            return yearComparison;
+        }
+        // Compare months
+        int monthComparison = this.month - other.getMonth();
+        if(monthComparison !=0) {
+            return monthComparison;
+        }
+
+        // Compare days
+        int dayComparison = this.day - other.getDay();
+        return dayComparison;
     }
 
     /**
