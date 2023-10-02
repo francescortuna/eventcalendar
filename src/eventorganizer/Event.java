@@ -55,7 +55,8 @@ public class Event implements Comparable<Event> {
         return String.format("[Event Date: %02d/%02d/%04d] [Start: %s] [End: %s] @%s (%s, %s) [Contact: %s, %s]",
                 getDate().getMonth(),
                 getDate().getDay(), getDate().getYear(), getStartTime().getStartTime(), getEndTime(), getLocation(),
-                getLocation().getBuildingName(), getLocation().getCampusName(), getContact().getDepartment().getFullName(),
+                getLocation().getBuildingName(), getLocation().getCampusName(),
+                getContact().getDepartment().getFullName(),
                 getContact().getEmail());
     }
 
@@ -136,11 +137,12 @@ public class Event implements Comparable<Event> {
     /**
      * Testbed main to test methods
      * TODO check methods with Date methods
+     * 
      * @param args command line arguments
      */
     public static void main(String[] args) {
-        // testUnequalEvents();
-        // testEqualEvents();
+        testUnequalEvents();
+        testEqualEvents();
         testString();
         // testLessThanDates();
         // testMoreThanDates();
@@ -163,7 +165,7 @@ public class Event implements Comparable<Event> {
 
         boolean expectedOutcome = false;
         boolean actualOutcome = eventOne.equals(eventTwo);
-        System.out.println("**Test case #1: Event one and Event two are two different events.");
+        System.out.println("**Test case #1 for equals(): Event one and event two are two different events.");
         testResult(expectedOutcome, actualOutcome);
     }
 
@@ -181,7 +183,7 @@ public class Event implements Comparable<Event> {
 
         boolean expectedOutcome = true;
         boolean actualOutcome = eventOne.equals(eventTwo);
-        System.out.println("**Test case #2: Event one and event two are the same events.");
+        System.out.println("**Test case #2 for equals(): Event one and event two are the same events.");
         testResult(expectedOutcome, actualOutcome);
     }
 
@@ -195,7 +197,7 @@ public class Event implements Comparable<Event> {
 
         String expectedOutcome = "[Event Date: 05/10/2024] [Start: 10:30 AM] [End: 11:15 AM] @ARC103 (Allison Road Classroom, Busch) [Contact: Computer Science, fdc16@rutgers.edu]";
         String actualOutcome = event.toString();
-        System.out.println("**Test case #1: Check output string.");
+        System.out.println("**Test case #1 for toString(): Check output string.");
         testResult(expectedOutcome, actualOutcome);
     }
 
@@ -213,7 +215,7 @@ public class Event implements Comparable<Event> {
 
         int expectedOutcome = -1;
         int actualOutcome = eventOne.compareTo(eventTwo);
-        System.out.println("**Test case #1: Event one is before event two.");
+        System.out.println("**Test case #1 for compareTo(): Event one is before event two.");
         testResult(expectedOutcome, actualOutcome);
     }
 
@@ -231,12 +233,13 @@ public class Event implements Comparable<Event> {
 
         int expectedOutcome = 1;
         int actualOutcome = eventOne.compareTo(eventTwo);
-        System.out.println("**Test case #2: Event one is after event two.");
+        System.out.println("**Test case #2 for compareTo(): Event one is after event two.");
         testResult(expectedOutcome, actualOutcome);
     }
 
     /**
-     * Test case #3 for compareTo(): Events one and two are happening at the same day, at the same time
+     * Test case #3 for compareTo(): Events one and two are happening at the same
+     * day, at the same time
      */
     private static void testEqualDatesTimeslots() {
         Date dateOne = new Date("11/10/2023");
@@ -249,12 +252,13 @@ public class Event implements Comparable<Event> {
 
         int expectedOutcome = 0;
         int actualOutcome = eventOne.compareTo(eventTwo);
-        System.out.println("**Test case #3: Event one and two are happening at the same day and time.");
+        System.out.println("**Test case #3 for compareTo(): Event one and two are happening at the same day and time.");
         testResult(expectedOutcome, actualOutcome);
     }
 
     /**
-     * Test case #4 for compareTo(): Event one is happening on the same day, but before event two
+     * Test case #4 for compareTo(): Event one is happening on the same day, but
+     * before event two
      */
     private static void testLessThanTimeslots() {
         Date dateOne = new Date("11/10/2023");
@@ -267,12 +271,13 @@ public class Event implements Comparable<Event> {
 
         int expectedOutcome = -1;
         int actualOutcome = eventOne.compareTo(eventTwo);
-        System.out.println("**Test case #4: Event one is happening on the same day, but before event two");
+        System.out.println("**Test case #4 for compareTo(): Event one is happening on the same day, but before event two");
         testResult(expectedOutcome, actualOutcome);
     }
 
     /**
-     * Test case #5 for compareTo(): Event one is happening on the same day, but after event two
+     * Test case #5 for compareTo(): Event one is happening on the same day, but
+     * after event two
      */
     private static void testMoreThanTimeslots() {
         Date dateOne = new Date("11/10/2023");
@@ -285,12 +290,12 @@ public class Event implements Comparable<Event> {
 
         int expectedOutcome = 1;
         int actualOutcome = eventOne.compareTo(eventTwo);
-        System.out.println("**Test case #4: Event one is happening on the same day, but before event two");
+        System.out.println("**Test case #5 for compareTo(): Event one is happening on the same day, but before event two");
         testResult(expectedOutcome, actualOutcome);
     }
 
     private static void testResult(boolean expectedOutcome, boolean actualOutcome) {
-        if(expectedOutcome == actualOutcome) {
+        if (expectedOutcome == actualOutcome) {
             System.out.println("Success");
         } else {
             System.out.println("Fail");
@@ -298,7 +303,7 @@ public class Event implements Comparable<Event> {
     }
 
     private static void testResult(String expectedOutcome, String actualOutcome) {
-        if(expectedOutcome.equals(actualOutcome)) {
+        if (expectedOutcome.equals(actualOutcome)) {
             System.out.println("Success");
         } else {
             System.out.println("Fail");
@@ -306,7 +311,7 @@ public class Event implements Comparable<Event> {
     }
 
     private static void testResult(int expectedOutcome, int actualOutcome) {
-        if(expectedOutcome == actualOutcome) {
+        if (expectedOutcome == actualOutcome) {
             System.out.println("Success");
         } else {
             System.out.println("Fail");
