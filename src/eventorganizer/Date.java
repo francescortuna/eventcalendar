@@ -214,7 +214,7 @@ public class Date implements Comparable<Date> {
         boolean expectedOutput = false;
         boolean actualOutput = date.isValid();
         System.out.println("**Test case #1: # of days in Feb in a non-leap year is 28");
-        testResult(date, expectedOutput, actualOutput);
+        testResult(expectedOutput, actualOutput);
     }
 
     /**
@@ -225,7 +225,7 @@ public class Date implements Comparable<Date> {
         boolean expectedOutput = true;
         boolean actualOutput = date.isValid();
         System.out.println("**Test case #2: # of days in Feb in a non-leap year is 28");
-        testResult(date, expectedOutput, actualOutput);
+        testResult(expectedOutput, actualOutput);
     }
 
     /**
@@ -236,7 +236,7 @@ public class Date implements Comparable<Date> {
         boolean expectedOutput = false;
         boolean actualOutput = date.isValid();
         System.out.println("**Test case #3: # of days in Feb. in a leap year is 29");
-        testResult(date, expectedOutput, actualOutput);
+        testResult(expectedOutput, actualOutput);
     }
 
     /**
@@ -247,7 +247,7 @@ public class Date implements Comparable<Date> {
         boolean expectedOutput = true;
         boolean actualOutput = date.isValid();
         System.out.println("**Test case #4: # of days in Feb. in a leap year is 29");
-        testResult(date, expectedOutput, actualOutput);
+        testResult(expectedOutput, actualOutput);
     }
 
     /**
@@ -258,7 +258,7 @@ public class Date implements Comparable<Date> {
         boolean expectedOutput = false;
         boolean actualOutput = date.isValid();
         System.out.println("**Test case #5: More than 31 days for month with 31 days");
-        testResult(date, expectedOutput, actualOutput);
+        testResult(expectedOutput, actualOutput);
     }
 
     /**
@@ -269,7 +269,7 @@ public class Date implements Comparable<Date> {
         boolean expectedOutput = true;
         boolean actualOutput = date.isValid();
         System.out.println("**Test case #6: Less than or equals to 31 days for month with 31 days");
-        testResult(date, expectedOutput, actualOutput);
+        testResult(expectedOutput, actualOutput);
     }
 
     /**
@@ -280,7 +280,7 @@ public class Date implements Comparable<Date> {
         boolean expectedOutput = false;
         boolean actualOutput = date.isValid();
         System.out.println("**Test case #7: More than 30 days for month with 30 days");
-        testResult(date, expectedOutput, actualOutput);
+        testResult(expectedOutput, actualOutput);
     }
 
     /**
@@ -291,7 +291,7 @@ public class Date implements Comparable<Date> {
         boolean expectedOutput = true;
         boolean actualOutput = date.isValid();
         System.out.println("**Test case #8: Less than or equals to 30 days for month with 30 days");
-        testResult(date, expectedOutput, actualOutput);
+        testResult(expectedOutput, actualOutput);
     }
 
     /**
@@ -302,7 +302,7 @@ public class Date implements Comparable<Date> {
         boolean expectedOutput = false;
         boolean actualOutput = date.isValid();
         System.out.println("**Test case #9: Days less than 1 day");
-        testResult(date, expectedOutput, actualOutput);
+        testResult(expectedOutput, actualOutput);
     }
 
     /**
@@ -313,7 +313,7 @@ public class Date implements Comparable<Date> {
         boolean expectedOutput = false;
         boolean actualOutput = date.isValid();
         System.out.println("**Test case #10: Months more than 12 months");
-        testResult(date, expectedOutput, actualOutput);
+        testResult(expectedOutput, actualOutput);
     }
 
     /**
@@ -324,16 +324,21 @@ public class Date implements Comparable<Date> {
         boolean expectedOutput = false;
         boolean actualOutput = date.isValid();
         System.out.println("**Test case #11: Months less than 1 month");
-        testResult(date, expectedOutput, actualOutput);
+        testResult(expectedOutput, actualOutput);
     }
 
     /**
      * Check if a given test case PASS or FAIL
      */
-    private static void testResult(Date date, boolean expectedOutput, boolean actualOutput) {
+    private static void testResult(boolean expectedOutput, boolean actualOutput) {
 
+        if (expectedOutput == actualOutput) {
+            System.out.println("PASS");
+        } else {
+            System.out.println("FAIL");
+        }
     }
-    // TO DO: ASK ABOUT TESTRESULT, HOW TO CODE, WHAT IS THIS FOR
+    // TODO: ASK ABOUT TESTRESULT, HOW TO CODE
     // CHECK MONTH WRITTEN AS 02 OR 2? IN DEMO PROF DID JUST 2
     //
 }
