@@ -3,14 +3,15 @@ package eventorganizer;
 import java.util.StringTokenizer;
 
 /**
+ * Contact class for an Event object, with the department and email of contact.
  * @author Frances Cortuna
  */
-
 public class Contact {
     private Department department;
     private String email;
 
     /**
+     * Constructor for Contact object with department and email as instance variables.
      * @param department Department
      * @param email Contact email
      */
@@ -25,25 +26,33 @@ public class Contact {
      * @return boolean
      */
     public boolean isValid() {
-        StringTokenizer tokenizer = new StringTokenizer(email, "@"); // Creates new StringTokenizer object to separate email into tokens
-        while(tokenizer.hasMoreTokens()) { // Iterates through tokens
+        StringTokenizer tokenizer = new StringTokenizer(email, "@");
+        while(tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken();
-            if(token.equals("rutgers.edu")) { // Checks if a token equals rutgers.edu domain
-                for(Department departmentEnum : Department.values()) { // If email is valid, then checks if department name is valid by iterating through Department values
+            if(token.equals("rutgers.edu")) {
+                for(Department departmentEnum : Department.values()) {
                     String contactDepartment = department.getFullName();
                     if(contactDepartment.equals(departmentEnum.getFullName())) { 
-                        return true; // If department name is also valid then return true as both fields are valid
+                        return true;
                     }
                 }
             }
         }
-        return false; // If at least one field is incorrect, return false
+        return false;
     }
 
+    /**
+     * Gets department of Contact object
+     * @return Department
+     */
     public Department getDepartment() {
         return department;
     }
 
+    /**
+     * Gets email of Contact object
+     * @return email of contact
+     */
     public String getEmail() {
         return email;
     }

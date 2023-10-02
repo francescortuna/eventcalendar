@@ -4,7 +4,6 @@ package eventorganizer;
  * Event class to create an event with a date, timeslot, location, contact, and duration.
  * @author Frances Cortuna
  */
-
 public class Event implements Comparable<Event> {
 
     private Date date;
@@ -301,6 +300,11 @@ public class Event implements Comparable<Event> {
         testResult(expectedOutcome, actualOutcome);
     }
 
+    /** 
+     * Compares expected outcome to actual outcome and outputs result to system.
+     * @param expectedOutcome Expected outcome
+     * @param actualOutcome Actual outcome
+     */
     private static void testResult(boolean expectedOutcome, boolean actualOutcome) {
         if (expectedOutcome == actualOutcome) {
             System.out.println("Success");
@@ -309,6 +313,11 @@ public class Event implements Comparable<Event> {
         }
     }
 
+    /** 
+     * Compares expected String to actual String and outputs result to system.
+     * @param expectedOutcome Expected String
+     * @param actualOutcome Actual String
+     */
     private static void testResult(String expectedOutcome, String actualOutcome) {
         if (expectedOutcome.equals(actualOutcome)) {
             System.out.println("Success");
@@ -316,7 +325,12 @@ public class Event implements Comparable<Event> {
             System.out.println("Fail");
         }
     }
-
+    
+    /** 
+     * Compares expected outcome to actual outcome and outputs result to system.
+     * @param expectedOutcome Expected outcome
+     * @param actualOutcome Actual outcome
+     */
     private static void testResult(String expectedOutcome, int actualOutcome) {
         switch (expectedOutcome) {
             case "Greater than":

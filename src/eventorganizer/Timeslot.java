@@ -1,10 +1,9 @@
 package eventorganizer;
 
 /**
+ * Constants for timeslot
  * @author Frances Cortuna
- *         Constants for timeslot
  */
-
 public enum Timeslot {
     MORNING(10, 30),
     AFTERNOON(14, 0),
@@ -14,8 +13,7 @@ public enum Timeslot {
     private int minute;
 
     /**
-     * Create a Timeslot object
-     * 
+     * Timeslot constants with hour and minute as objects
      * @param hour
      * @param minute
      */
@@ -25,8 +23,7 @@ public enum Timeslot {
     }
 
     /**
-     * Getter method to return start time
-     * 
+     * Gets start time as a String formatted as hh:mm AM/PM
      * @return start time
      */
     public String getStartTime() {
@@ -34,9 +31,9 @@ public enum Timeslot {
             case MORNING:
                 return String.format("%02d:%02d AM", hour, minute);
             case AFTERNOON:
-                return String.format("%d:%02d PM", hour % 12, minute); // ternary operator turns 14 into 2
+                return String.format("%d:%02d PM", hour % 12, minute);
             case EVENING:
-                return String.format("%d:%02d PM", hour % 12, minute); // turns 18 into 6
+                return String.format("%d:%02d PM", hour % 12, minute);
             default:
                 return "";
 
@@ -44,7 +41,7 @@ public enum Timeslot {
     }
 
     /**
-     * 
+     * Gets hour
      * @return hour
      */
     public int getHour() {
@@ -52,7 +49,7 @@ public enum Timeslot {
     }
 
     /**
-     * 
+     * Gets minute
      * @return minute
      */
     public int getMinute() {

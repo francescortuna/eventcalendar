@@ -1,10 +1,9 @@
 package eventorganizer;
 
 /**
+ * Constants for location of Event
  * @author Frances Cortuna
- *         Constants for location
  */
-
 public enum Location {
     HLL114("Hill Center", "Busch"),
     ARC103("Allison Road Classroom", "Busch"),
@@ -17,8 +16,7 @@ public enum Location {
     private String campusName;
 
     /**
-     * Create a Location object with the building name and campus name
-     * 
+     * Constructor for location constant with the building name and campus name as properties
      * @param buildingName
      * @param campusName
      */
@@ -28,8 +26,7 @@ public enum Location {
     }
 
     /**
-     * Getter method
-     * 
+     * Gets building name
      * @return Building name
      */
     public String getBuildingName() {
@@ -37,8 +34,7 @@ public enum Location {
     }
 
     /**
-     * Getter method
-     * 
+     * Gets campus name
      * @return Campus name
      */
     public String getCampusName() {

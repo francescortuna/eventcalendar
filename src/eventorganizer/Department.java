@@ -1,10 +1,9 @@
 package eventorganizer;
 
 /**
+ * Constants for departments
  * @author Frances Cortuna
- *         Constants for departments
  */
-
 public enum Department {
     CS("Computer Science"),
     EE("Electrical Engineering"),
@@ -15,8 +14,7 @@ public enum Department {
     private String fullName;
 
     /**
-     * Create a Department object with its full name
-     * 
+     * Department constants with its full name as the property
      * @param fullName Full name of the department
      */
     Department(String fullName) {
@@ -24,7 +22,7 @@ public enum Department {
     }
 
     /**
-     * 
+     * Gets full name of the department
      * @return Full name of the department
      */
     public String getFullName() {
