@@ -1,8 +1,9 @@
 package eventorganizer;
 
 /**
- * TODO add desc for class
- * 
+ * EventCalendar class that is a linear data structure to hold the list of events.
+ * Has methods to add, remove, and sort events.
+ * Can sort events by date/time, campus/building, and department.
  * @author Jia Wern Chong, Frances Cortuna
  */
 public class EventCalendar {
@@ -137,7 +138,7 @@ public class EventCalendar {
 
                 int eventToSort = i;
                 while (eventToSort != 0) {
-                    if (events[eventToSort].compareTo(events[eventToSort - 1]) <= 0) {
+                    if (events[eventToSort].compareTo(events[eventToSort - 1]) < 0) {
                         switchEvents(eventToSort, eventToSort - 1);
 
                         eventToSort -= 1;
@@ -239,8 +240,45 @@ public class EventCalendar {
         return eventOneBuilding.compareTo(eventTwoBuilding);
     }
 
-    // ordered by department
+    /**
+     * Sorts and prints events array by department
+     */
     public void printByDepartment() {
+        for(int i = 0; i < events.length - 1; i++) {
+            int departmentComparison = compareDepartment(events[i], events[i + 1]);
+            if (departmentComparison > 0) {
+                switchEvents(i, i + 1);
 
+                int eventToSort = i;
+                while(eventToSort != 0) {
+                    departmentComparison = compareDepartment(events[i], events[i - 1]);
+
+                    if (departmentComparison < 0) {
+                        switchEvents(i, i - 1);
+                        eventToSort--;
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+
+        print();
+    }
+
+    /**
+     * Compares departments of two events.
+     * Returns a positive number if event one's department is after event two's.
+     * Returns a negative number if event one's department is before event two's.
+     * Returns 0 if they're in same department.
+     * @param eventOne Event one being compared
+     * @param eventTwo Event two being compared
+     * @return A positive number, a negative number, or 0 depending on result of comparison.
+     */
+    private int compareDepartment(Event eventOne, Event eventTwo) {
+        String eventOneDepartment = eventOne.getContact().getDepartment().getFullName();
+        String eventTwoDepartment = eventTwo.getContact().getDepartment().getFullName();
+
+        return eventOneDepartment.compareTo(eventTwoDepartment);
     }
 }
