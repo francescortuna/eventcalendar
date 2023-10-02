@@ -119,7 +119,7 @@ public class Date implements Comparable<Date> {
         if(month >= MIN_MONTHS && month <= MAX_MONTHS){ // Checks if month is a valid month between 1(January) - 12(December)
             if(day >= MIN_DAYS) { // Checks if day is valid (>= 1) and not 0 or negative integer
                 if (month == jan || month == mar || month == may || month == july ||
-                        month == aug || month == oct || month == dec) { // Check if month is a month with 31 days
+                        month == aug || month == oct || month == dec) {
                     if (day <= MONTH_WITH_31DAYS) {
                         return true; // If day is between 1-31 days, day is valid, return true
                     }
