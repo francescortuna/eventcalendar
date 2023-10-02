@@ -144,11 +144,11 @@ public class Event implements Comparable<Event> {
         testUnequalEvents();
         testEqualEvents();
         testString();
-        // testLessThanDates();
-        // testMoreThanDates();
-        // testEqualDatesTimeslots();
-        // testLessThanTimeslots();
-        // testMoreThanTimeslots();
+        testLessThanDates();
+        testMoreThanDates();
+        testEqualDatesTimeslots();
+        testLessThanTimeslots();
+        testMoreThanTimeslots();
     }
 
     /**
@@ -213,7 +213,7 @@ public class Event implements Comparable<Event> {
         Contact contactTwo = new Contact(Department.BAIT, "sjd13@rutgers.edu");
         Event eventTwo = new Event(dateTwo, Timeslot.AFTERNOON, Location.AB2225, contactTwo, 30);
 
-        int expectedOutcome = -1;
+        String expectedOutcome = "Less than";
         int actualOutcome = eventOne.compareTo(eventTwo);
         System.out.println("**Test case #1 for compareTo(): Event one is before event two.");
         testResult(expectedOutcome, actualOutcome);
@@ -231,7 +231,7 @@ public class Event implements Comparable<Event> {
         Contact contactTwo = new Contact(Department.BAIT, "sjd13@rutgers.edu");
         Event eventTwo = new Event(dateTwo, Timeslot.AFTERNOON, Location.AB2225, contactTwo, 30);
 
-        int expectedOutcome = 1;
+        String expectedOutcome = "Greater than";
         int actualOutcome = eventOne.compareTo(eventTwo);
         System.out.println("**Test case #2 for compareTo(): Event one is after event two.");
         testResult(expectedOutcome, actualOutcome);
@@ -250,7 +250,7 @@ public class Event implements Comparable<Event> {
         Contact contactTwo = new Contact(Department.BAIT, "sjd13@rutgers.edu");
         Event eventTwo = new Event(dateTwo, Timeslot.MORNING, Location.AB2225, contactTwo, 30);
 
-        int expectedOutcome = 0;
+        String expectedOutcome = "Equal";
         int actualOutcome = eventOne.compareTo(eventTwo);
         System.out.println("**Test case #3 for compareTo(): Event one and two are happening at the same day and time.");
         testResult(expectedOutcome, actualOutcome);
@@ -269,9 +269,10 @@ public class Event implements Comparable<Event> {
         Contact contactTwo = new Contact(Department.BAIT, "sjd13@rutgers.edu");
         Event eventTwo = new Event(dateTwo, Timeslot.AFTERNOON, Location.AB2225, contactTwo, 30);
 
-        int expectedOutcome = -1;
+        String expectedOutcome = "Less than";
         int actualOutcome = eventOne.compareTo(eventTwo);
-        System.out.println("**Test case #4 for compareTo(): Event one is happening on the same day, but before event two");
+        System.out.println(
+                "**Test case #4 for compareTo(): Event one is happening on the same day, but before event two");
         testResult(expectedOutcome, actualOutcome);
     }
 
@@ -288,9 +289,10 @@ public class Event implements Comparable<Event> {
         Contact contactTwo = new Contact(Department.BAIT, "sjd13@rutgers.edu");
         Event eventTwo = new Event(dateTwo, Timeslot.MORNING, Location.AB2225, contactTwo, 30);
 
-        int expectedOutcome = 1;
+        String expectedOutcome = "Greater than";
         int actualOutcome = eventOne.compareTo(eventTwo);
-        System.out.println("**Test case #5 for compareTo(): Event one is happening on the same day, but before event two");
+        System.out.println(
+                "**Test case #5 for compareTo(): Event one is happening on the same day, but before event two");
         testResult(expectedOutcome, actualOutcome);
     }
 
@@ -310,11 +312,31 @@ public class Event implements Comparable<Event> {
         }
     }
 
-    private static void testResult(int expectedOutcome, int actualOutcome) {
-        if (expectedOutcome == actualOutcome) {
-            System.out.println("Success");
-        } else {
-            System.out.println("Fail");
+    private static void testResult(String expectedOutcome, int actualOutcome) {
+        switch (expectedOutcome) {
+            case "Greater than":
+                if (actualOutcome > 0) {
+                    System.out.println("Success.");
+                } else {
+                    System.out.println("Fail.");
+                }
+                break;
+            case "Less than":
+                if (actualOutcome < 0) {
+                    System.out.println("Success");
+                } else {
+                    System.out.println("Fail.");
+                }
+                break;
+            case "Equal":
+                if (actualOutcome == 0) {
+                    System.out.println("Success");
+                } else {
+                    System.out.println("Fail.");
+                }
+                break;
+            default:
+                System.out.println("Fail.");
         }
     }
 }
