@@ -45,7 +45,7 @@ public class Date implements Comparable<Date> {
      */
     public Date() {
         Calendar todayDate = Calendar.getInstance(); //Creates a calendar object to get today's date
-        month = todayDate.get(Calendar.MONTH)+1; // Get the current month from Calendar class
+        month = todayDate.get(Calendar.MONTH) + 1; // Get the current month from Calendar class
         day = todayDate.get(Calendar.DAY_OF_MONTH); // Get the current day from Calendar class
         year = todayDate.get(Calendar.YEAR); // Get the current year from Calendar class
     }
@@ -62,7 +62,7 @@ public class Date implements Comparable<Date> {
         }
         // Compare months
         int monthComparison = this.month - other.getMonth();
-        if(monthComparison !=0) {
+        if(monthComparison != 0) {
             return monthComparison;
         }
 
@@ -85,8 +85,8 @@ public class Date implements Comparable<Date> {
      */
     public boolean isLeapYear() { // Method to check if it is a leap year
         if(year%QUADRENNIAL == 0){
-            if(year%CENTENNIAL==0){
-                if(year%QUATERCENTENNIAL==0){
+            if(year%CENTENNIAL == 0){
+                if(year%QUATERCENTENNIAL == 0){
                     return true; // If year is divisible by 4, 100 and 400, it's a leap year, returns true
                 } else { return false;} // If year is divisible by 100 but not 400, it is not a leap year, returns false
             } else { return true; } // If year is only divisible by 4 and not divisible by 100, it is a leap year, returns true
@@ -185,8 +185,8 @@ public class Date implements Comparable<Date> {
             return false;
         }
         Date other = (Date) obj;
-        return ((getMonth()==other.getMonth()) && (getDay() ==other.getDay())
-                && (getYear()==other.getYear()));
+        return ((getMonth() == other.getMonth()) && (getDay() == other.getDay())
+                && (getYear() == other.getYear()));
     }
 
     /**
