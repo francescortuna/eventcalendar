@@ -339,6 +339,4 @@ public class Date implements Comparable<Date> {
             System.out.println("FAIL");
         }
     }
-    // TODO: CHECK MONTH WRITTEN AS 02 OR 2? IN DEMO PROF HAVE JUST 2
-    //
 }

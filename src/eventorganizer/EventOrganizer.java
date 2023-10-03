@@ -53,15 +53,20 @@ public class EventOrganizer {
                 addEvent(stringTokenizer);
                 break;
             case "R":
-                break; // TODO cancel an event
+                cancelEvent(stringTokenizer);
+                break;
             case "P":
-                break; // TODO display event calendar
+                displayEventCalendar();
+                break;
             case "PE":
-                break; // TODO display event calendar sorted by date/timeslot
+                sortEventCalendarByDate();
+                break;
             case "PC":
-                break; // TODO display event calendar sorted by campus/building
+                sortEventCalendarByCampus();
+                break;
             case "PD":
-                break; // TODO display event calendar sorted by department
+                sortEventCalendarByDepartment();
+                break;
             default:
                 System.out.println(String.format("%s is an invalid command!", command));
         }
@@ -75,7 +80,7 @@ public class EventOrganizer {
         Date eventDate = new Date(stringTokenizer.nextToken());
         if(!validateDate(eventDate))    return;
 
-        Timeslot timeslot = parseEnum(Timeslot.class, stringTokenizer.nextToken().toUpperCase(), "timeslot");
+        Timeslot timeslot = parseEnum(Timeslot.class, stringTokenizer.nextToken().toUpperCase(), "time slot");
         if (timeslot == null)   return;
         Location location = parseEnum(Location.class, stringTokenizer.nextToken().toUpperCase(), "location");
         if (location == null)   return;
@@ -122,10 +127,17 @@ public class EventOrganizer {
             return false;
         }
 
-        int sixMonths = 6; // add 6 months to current date to determine limit for adding an event
-        Date addSixMonths = new Date(String.format("%02d/%02d/%04d",currentDate.getMonth() + sixMonths, currentDate.getDay(), currentDate.getYear()));
+        int sixMonths = 6;
+        int monthsInYear = 12;
+        int addSixMonths = currentDate.getMonth() + sixMonths; // add 6 months to current date to determine limit for adding an event
+        int yearForSixMonths = currentDate.getYear();
+        if(addSixMonths > monthsInYear) {
+            addSixMonths %= monthsInYear;
+            yearForSixMonths++;
+        }
+        Date sixMonthsFromNow = new Date(String.format("%02d/%02d/%04d",addSixMonths, currentDate.getDay(), yearForSixMonths));
 
-        if(eventDate.compareTo(addSixMonths) > 0) {
+        if(eventDate.compareTo(sixMonthsFromNow) > 0) {
             System.out.println(String.format("%d/%d/%d: Event date must be within 6 months!", eventDate.getMonth(), eventDate.getDay(), eventDate.getYear()));
             return false;
         }
@@ -166,5 +178,67 @@ public class EventOrganizer {
         }
 
         return false;
+    }
+
+    /**
+     * Cancel an event.
+     * This removes the event from the event array.
+     * If the event was not in the event array originally, there will be an error message.
+     * @param stringTokenizer Commandline input for what event to remove.
+     */
+    private void cancelEvent(StringTokenizer stringTokenizer) {
+        Date date = new Date(stringTokenizer.nextToken());
+        if(!validateDate(date)) return;
+        Timeslot timeslot = Enum.valueOf(Timeslot.class, stringTokenizer.nextToken().toUpperCase());
+        Location location = Enum.valueOf(Location.class, stringTokenizer.nextToken().toUpperCase());
+
+        Event event = new Event(date, timeslot, location);
+
+        if(checkEventIsInCalendar(event)) {
+            eventCalendar.remove(event);
+            System.out.println("Event has been removed from the calendar!");
+        } else {
+            System.out.println("Cannot remove; event is not in the calendar!");
+        }
+    }
+
+    private boolean checkEmptyCalendar() {
+        if(eventCalendar.getNumEvents() == 0) {
+            System.out.println("Event calendar is empty!");
+            return true;
+        }
+
+        return false;
+    }
+    /**
+     * Displays event calendar in current order of array.
+     * If event calendar is empty, there will be an error message.
+     */
+    private void displayEventCalendar() {
+        if(checkEmptyCalendar()) return;
+
+        eventCalendar.print();
+    }
+
+    private void sortEventCalendarByDate() {
+        if(checkEmptyCalendar()) return;
+
+        eventCalendar.printByDate();
+    }
+
+    private void sortEventCalendarByCampus() {
+        if(checkEmptyCalendar()) return;
+
+        eventCalendar.printByCampus();
+    }
+
+    private void sortEventCalendarByDepartment() {
+        if(checkEmptyCalendar()) return;
+
+        eventCalendar.printByDepartment();
+    }
+
+    public static void main(String[] args) {
+        new EventOrganizer().run();
     }
 }

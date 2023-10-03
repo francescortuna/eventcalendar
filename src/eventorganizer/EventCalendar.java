@@ -64,7 +64,7 @@ public class EventCalendar {
         int newCapacity = events.length + GROWTH_FACTOR;
         Event[] newEventArray = new Event[newCapacity];
 
-        for (int i = 0; i < events.length; i++) {
+        for (int i = 0; i < numEvents; i++) {
             newEventArray[i] = events[i];
         }
 
@@ -102,6 +102,7 @@ public class EventCalendar {
                 events[i] = events[i + 1];
             }
             numEvents -= 1;
+            events[numEvents] = null;
             return true;
         }
 
@@ -126,7 +127,7 @@ public class EventCalendar {
      * Prints event array as it is.
      */
     public void print() {
-        for (int i = 0; i < events.length; i++) {
+        for (int i = 0; i < numEvents; i++) {
             System.out.println(events[i].toString());
         }
     }
@@ -148,7 +149,7 @@ public class EventCalendar {
      * Sorts and prints event array in order by date and timeslot.
      */
     public void printByDate() {
-        for (int i = 0; i < events.length - 1; i++) {
+        for (int i = 0; i < numEvents - 1; i++) {
             if (events[i].compareTo(events[i + 1]) > 0) {
                 switchEvents(i, i + 1);
 
@@ -172,7 +173,7 @@ public class EventCalendar {
      * Sorts and prints event array in order by campus and building
      */
     public void printByCampus() {
-        for (int i = 0; i < events.length - 1; i++) {
+        for (int i = 0; i < numEvents - 1; i++) {
             int campusComparison = compareCampus(events[i], events[i + 1]);
 
             if (campusComparison > 0) {
@@ -213,6 +214,8 @@ public class EventCalendar {
                     switchEvents(eventToSort, eventToSort - 1);
 
                     eventToSort -= 1;
+                } else if(buildingComparison == 0) {
+                    break;
                 }
             } else {
                 break;
@@ -260,7 +263,7 @@ public class EventCalendar {
      * Sorts and prints events array by department
      */
     public void printByDepartment() {
-        for(int i = 0; i < events.length - 1; i++) {
+        for(int i = 0; i < numEvents - 1; i++) {
             int departmentComparison = compareDepartment(events[i], events[i + 1]);
             if (departmentComparison > 0) {
                 switchEvents(i, i + 1);

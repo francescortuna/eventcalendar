@@ -31,11 +31,11 @@ public enum Timeslot {
         
         switch (this) {
             case MORNING:
-                return String.format("%02d:%02d AM", hour, minute);
+                return String.format("%02d:%02dam", hour, minute);
             case AFTERNOON:
-                return String.format("%d:%02d PM", hour % militaryTimeEnd, minute);
+                return String.format("%d:%02dpm", hour % militaryTimeEnd, minute);
             case EVENING:
-                return String.format("%d:%02d PM", hour % militaryTimeEnd, minute);
+                return String.format("%d:%02dpm", hour % militaryTimeEnd, minute);
             default:
                 return "";
 

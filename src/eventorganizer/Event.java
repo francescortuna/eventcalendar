@@ -34,6 +34,15 @@ public class Event implements Comparable<Event> {
         this.duration = duration;
     }
 
+    public Event(
+            Date date,
+            Timeslot startTime,
+            Location location) {
+        this.date = date;
+        this.startTime = startTime;
+        this.location = location;
+    }
+
     /**
      * Checks if two Event objects are equal.
      * @param object Event being compared
@@ -108,8 +117,8 @@ public class Event implements Comparable<Event> {
             endMinute %= minutesInHour;
         }
 
-        return String.format("%02d:%02d %s", endHour > militaryTimeEnd ? endHour % militaryTimeEnd : endHour, endMinute,
-                endHour >= startOfPM ? "PM" : "AM");
+        return String.format("%d:%d%s", endHour > militaryTimeEnd ? endHour % militaryTimeEnd : endHour, endMinute,
+                endHour >= startOfPM ? "pm" : "am");
     }
 
     /**
@@ -203,7 +212,7 @@ public class Event implements Comparable<Event> {
         Contact contact = new Contact(Department.CS, "fdc16@rutgers.edu");
         Event event = new Event(date, Timeslot.MORNING, Location.ARC103, contact, 45);
 
-        String expectedOutcome = "[Event Date: 5/10/2024] [Start: 10:30 AM] [End: 11:15 AM] @ARC103 (Allison Road Classroom, Busch) [Contact: Computer Science, fdc16@rutgers.edu]";
+        String expectedOutcome = "[Event Date: 5/10/2024] [Start: 10:30am] [End: 11:15am] @ARC103 (Allison Road Classroom, Busch) [Contact: Computer Science, fdc16@rutgers.edu]";
         String actualOutcome = event.toString();
         System.out.println("**Test case #1 for toString(): Check output string.");
         testResult(expectedOutcome, actualOutcome);
