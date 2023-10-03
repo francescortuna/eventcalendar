@@ -25,6 +25,7 @@ public class EventOrganizer {
      */
     public void run() {
         System.out.println("Event Organizer running....");
+        System.out.println();
 
         while (true) {
             String command = scanner.nextLine().trim();
@@ -246,9 +247,5 @@ public class EventOrganizer {
         System.out.println("* Event calendar by department *");
         eventCalendar.printByDepartment();
         System.out.println("* end of event calendar *");
-    }
-
-    public static void main(String[] args) {
-        new EventOrganizer().run();
     }
 }
