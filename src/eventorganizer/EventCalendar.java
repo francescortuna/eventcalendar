@@ -25,6 +25,22 @@ public class EventCalendar {
     }
 
     /**
+     * Getter method to get number of events
+     * @return Number of events
+     */
+    public int getNumEvents() {
+        return numEvents;
+    }
+    
+    /**
+     * Getter method to get events array
+     * @return Events array
+     */
+    public Event[] getEventsArray() {
+        return events;
+    }
+
+    /**
      * Find an Event in array of Events.
      * If Event is in array, it returns its index. If not, it returns -1
      * 

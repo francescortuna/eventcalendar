@@ -60,7 +60,7 @@ public class Event implements Comparable<Event> {
      */
     @Override
     public String toString() {
-        return String.format("[Event Date: %d/%02d/%04d] [Start: %s] [End: %s] @%s (%s, %s) [Contact: %s, %s]",
+        return String.format("[Event Date: %d/%d/%d] [Start: %s] [End: %s] @%s (%s, %s) [Contact: %s, %s]",
                 getDate().getMonth(),
                 getDate().getDay(), getDate().getYear(), getStartTime().getStartTime(), getEndTime(), getLocation(),
                 getLocation().getBuildingName(), getLocation().getCampusName(),
