@@ -29,6 +29,8 @@ public class EventOrganizer {
         while (true) {
             String command = scanner.nextLine().trim();
 
+            if(command.isEmpty()) continue;
+
             if (command.equals("Q")) {
                 System.out.println("Event Organizer terminated.");
                 break;
@@ -217,25 +219,33 @@ public class EventOrganizer {
     private void displayEventCalendar() {
         if(checkEmptyCalendar()) return;
 
+        System.out.println("* Event calendar *");
         eventCalendar.print();
+        System.out.println("* end of event calendar *");
     }
 
     private void sortEventCalendarByDate() {
         if(checkEmptyCalendar()) return;
 
+        System.out.println("* Event calendar by event date and start time *");
         eventCalendar.printByDate();
+        System.out.println("* end of event calendar *");
     }
 
     private void sortEventCalendarByCampus() {
         if(checkEmptyCalendar()) return;
 
+        System.out.println("* Event calendar by campus and building *");
         eventCalendar.printByCampus();
+        System.out.println("* end of event calendar *");
     }
 
     private void sortEventCalendarByDepartment() {
         if(checkEmptyCalendar()) return;
 
+        System.out.println("* Event calendar by department *");
         eventCalendar.printByDepartment();
+        System.out.println("* end of event calendar *");
     }
 
     public static void main(String[] args) {

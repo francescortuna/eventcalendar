@@ -117,7 +117,7 @@ public class Event implements Comparable<Event> {
             endMinute %= minutesInHour;
         }
 
-        return String.format("%d:%d%s", endHour > militaryTimeEnd ? endHour % militaryTimeEnd : endHour, endMinute,
+        return String.format("%d:%02d%s", endHour > militaryTimeEnd ? endHour % militaryTimeEnd : endHour, endMinute,
                 endHour >= startOfPM ? "pm" : "am");
     }
 

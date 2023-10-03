@@ -214,7 +214,7 @@ public class EventCalendar {
                     switchEvents(eventToSort, eventToSort - 1);
 
                     eventToSort -= 1;
-                } else if(buildingComparison == 0) {
+                } else {
                     break;
                 }
             } else {
@@ -270,10 +270,10 @@ public class EventCalendar {
 
                 int eventToSort = i;
                 while(eventToSort != 0) {
-                    departmentComparison = compareDepartment(events[i], events[i - 1]);
+                    departmentComparison = compareDepartment(events[eventToSort], events[eventToSort - 1]);
 
                     if (departmentComparison < 0) {
-                        switchEvents(i, i - 1);
+                        switchEvents(eventToSort, eventToSort - 1);
                         eventToSort--;
                     } else {
                         break;
