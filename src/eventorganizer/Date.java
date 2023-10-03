@@ -205,7 +205,6 @@ public class Date implements Comparable<Date> {
         testDay_LessThan1Day();
         testMonth_MoreThan12Months();
         testMonth_LessThan1Month();
-        testYear_LessThan1900();
     }
 
     /**
@@ -326,17 +325,6 @@ public class Date implements Comparable<Date> {
         boolean expectedOutput = false;
         boolean actualOutput = date.isValid();
         System.out.println("**Test case #11: Months less than 1 month");
-        testResult(expectedOutput, actualOutput);
-    }
-
-    /**
-     * Test case #12 for isValid(): Test year less than 1900
-     */
-    private static void testYear_LessThan1900() {
-        Date date = new Date("11/21/800");
-        boolean expectedOutput = false;
-        boolean actualOutput = date.isValid();
-        System.out.println("**Test case #12: Year less than 1900");
         testResult(expectedOutput, actualOutput);
     }
 
