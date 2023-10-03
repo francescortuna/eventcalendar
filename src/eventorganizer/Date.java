@@ -3,7 +3,8 @@ import java.util.Calendar;
 import java.util.StringTokenizer;
 
 /**
- * Constants for dates
+ * Date class that creates a date object
+ * Has methods to compare 2 dates, to get today's date, check if is leap year, check if date is a valid calendar date, check if 2 dates are the same
  * @author Jia Wern Chong
  */
 
@@ -27,7 +28,7 @@ public class Date implements Comparable<Date> {
     private int day;
 
     /**
-     * Constructor that takes in string in the form of "mm/dd/yy"
+     * Constructor that takes in string in the form of "mm/dd/yy" and separate dates into individual categories
      * @param date
      */
     Date(String date) {
@@ -139,7 +140,7 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Returns the textual representation of a fitness.student.Date object
+     * Returns the textual representation of a Date object
      * @param date
      */
     public String toString() {
