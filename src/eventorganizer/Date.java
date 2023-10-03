@@ -33,10 +33,10 @@ public class Date implements Comparable<Date> {
      */
     Date(String date) {
         StringTokenizer dateToken = new StringTokenizer(date, "/"); // Creates new StringTokenizer object to separate dates into tokens
-        while (dateToken.hasMoreTokens()){ // Iterates through the tokens
-            month = Integer.parseInt(dateToken.nextToken()); // Cast string into integers for month
-            day = Integer.parseInt(dateToken.nextToken()); // Cast string into integers for day
-            year = Integer.parseInt(dateToken.nextToken()); // Cast string into integers for year
+        while (dateToken.hasMoreTokens()){ // Iterates through the tokens and cast string into integers for the dates
+            month = Integer.parseInt(dateToken.nextToken());
+            day = Integer.parseInt(dateToken.nextToken());
+            year = Integer.parseInt(dateToken.nextToken());
         }
     }
 
@@ -45,9 +45,9 @@ public class Date implements Comparable<Date> {
      */
     public Date() {
         Calendar todayDate = Calendar.getInstance(); //Creates a calendar object to get today's date
-        month = todayDate.get(Calendar.MONTH)+1; // Get the current month from Calendar class and assign the month
-        day = todayDate.get(Calendar.DAY_OF_MONTH); // Get the current day from Calendar class and assign the day
-        year = todayDate.get(Calendar.YEAR); // Get the current year from Calendar class and assign the year
+        month = todayDate.get(Calendar.MONTH)+1; // Get the current month from Calendar class
+        day = todayDate.get(Calendar.DAY_OF_MONTH); // Get the current day from Calendar class
+        year = todayDate.get(Calendar.YEAR); // Get the current year from Calendar class
     }
 
     /**
@@ -81,13 +81,13 @@ public class Date implements Comparable<Date> {
 
     /**
      * Check if year is a leap year or not
-     * @return true or false
+     * @return boolean
      */
     public boolean isLeapYear() { // Method to check if it is a leap year
         if(year%QUADRENNIAL == 0){
             if(year%CENTENNIAL==0){
                 if(year%QUATERCENTENNIAL==0){
-                    return true; // If year is divisible by 4 (quadrennial), 100 (centennial) and 400 (quatercentennial), it's a leap year,returns true
+                    return true; // If year is divisible by 4, 100 and 400, it's a leap year, returns true
                 } else { return false;} // If year is divisible by 100 but not 400, it is not a leap year, returns false
             } else { return true; } // If year is only divisible by 4 and not divisible by 100, it is a leap year, returns true
         } else { return false; } // If year is not divisible by 4, it is not a leap year, returns false
@@ -95,6 +95,7 @@ public class Date implements Comparable<Date> {
 
     /**
      * Check if date is a valid calendar date
+     * @return boolean
      */
     public boolean isValid() {
 
@@ -141,8 +142,8 @@ public class Date implements Comparable<Date> {
 
     /**
      * Returns the textual representation of a Date object
-     * @param date
      */
+    @Override
     public String toString() {
         return month + "/" + day + "/" + year;
     }
@@ -173,6 +174,7 @@ public class Date implements Comparable<Date> {
 
     /**
      *  Check if two dates are the same
+     * @param obj Object to be compared to
      */
     @Override
     public boolean equals (Object obj) {
@@ -203,6 +205,7 @@ public class Date implements Comparable<Date> {
         testDay_LessThan1Day();
         testMonth_MoreThan12Months();
         testMonth_LessThan1Month();
+        testYear_LessThan1900();
     }
 
     /**
@@ -327,6 +330,17 @@ public class Date implements Comparable<Date> {
     }
 
     /**
+     * Test case #12 for isValid(): Test year less than 1900
+     */
+    private static void testYear_LessThan1900() {
+        Date date = new Date("11/21/800");
+        boolean expectedOutput = false;
+        boolean actualOutput = date.isValid();
+        System.out.println("**Test case #12: Year less than 1900");
+        testResult(expectedOutput, actualOutput);
+    }
+
+    /**
      * Check if a given test case PASS or FAIL
      */
     private static void testResult(boolean expectedOutput, boolean actualOutput) {
@@ -337,6 +351,6 @@ public class Date implements Comparable<Date> {
             System.out.println("FAIL");
         }
     }
-    // TODO: CHECK MONTH WRITTEN AS 02 OR 2? IN DEMO PROF DID JUST 2
+    // TODO: CHECK MONTH WRITTEN AS 02 OR 2? IN DEMO PROF HAVE JUST 2
     //
 }
